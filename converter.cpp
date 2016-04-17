@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+#include "language.h"
+
 using namespace std;
 
 void GenerateAllTranslatorSentences();
@@ -93,8 +95,7 @@ void GenerateTranslatorSentences(const string & sLang)
             sLang.data());
             
     // Construct the File Name.
-    //
-    QCString Filename("Translator_" + sLang + ".xml");
+    string Filename("Translator_" + sLang + ".xml");
 
 #if 0    
     //???
@@ -123,7 +124,6 @@ void GenerateTranslatorSentences(const string & sLang)
         delete theTranslator;
 
     // Set the language.
-    //
     setTranslator(sLang);
     
     // Generate Sentence definitions for all translator methods.
@@ -997,3 +997,12 @@ void GenerateTranslatorSentences(const string & sLang)
 }
 
 
+int main()
+{
+	GenerateTranslatorSentences("english");
+	GenerateTranslatorSentences("german");
+	GenerateTranslatorSentences("czech");
+	GenerateTranslatorSentences("dutch");
+
+	return 0;
+}

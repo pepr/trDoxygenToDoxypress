@@ -98,8 +98,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="converter.cpp" />
+    <ClCompile Include="language.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="language.h" />
     <ClInclude Include="translator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
