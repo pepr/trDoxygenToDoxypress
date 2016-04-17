@@ -1,35 +1,64 @@
 #include <qcstring.h>
 #include <qtextstream.h>
-
-#include "converter.h"
 #include "language.h"
+
+class QCString;
+class QTextStream;
+
+void GenerateAllTranslatorSentences();
+void WriteHeading(QTextStream & fout,
+                  const QCString & CountryName,
+                  const QCString & CharsetId);
+void WriteSentence(QTextStream & fout,
+                   const QCString & SentenceId,
+                   const QCString & SentenceBody);
+void GenerateTranslatorSentences(const QCString & sLang);
+
 
 void GenerateAllTranslatorSentences()
 {
-    GenerateTranslatorSentences("brazilian");
-    GenerateTranslatorSentences("chinese");
-    GenerateTranslatorSentences("croatian");
-    GenerateTranslatorSentences("czech");
-    GenerateTranslatorSentences("danish");
-    GenerateTranslatorSentences("dutch");
-    GenerateTranslatorSentences("english");
-    GenerateTranslatorSentences("finnish");
-    GenerateTranslatorSentences("french");
-    GenerateTranslatorSentences("german");
-    GenerateTranslatorSentences("hungarian");
-    GenerateTranslatorSentences("italian");
-    GenerateTranslatorSentences("japanese");
-    GenerateTranslatorSentences("korean");
-    GenerateTranslatorSentences("norwegian");
-    GenerateTranslatorSentences("polish");
-    GenerateTranslatorSentences("portuguese");
-    GenerateTranslatorSentences("romanian");
-    GenerateTranslatorSentences("russian");
-    GenerateTranslatorSentences("slovak");
-    GenerateTranslatorSentences("slovene");
-    GenerateTranslatorSentences("spanish");
-    GenerateTranslatorSentences("swedish");
-    GenerateTranslatorSentences("ukrainian");
+    GenerateTranslatorSentences("Afrikaans");
+    GenerateTranslatorSentences("Arabic");
+    GenerateTranslatorSentences("Armenian");
+    GenerateTranslatorSentences("Brazilian Portuguese");
+    GenerateTranslatorSentences("Catalan");
+    GenerateTranslatorSentences("Chinese");
+    GenerateTranslatorSentences("Chinese Traditional");
+    GenerateTranslatorSentences("Croatian");
+    GenerateTranslatorSentences("Czech");
+    GenerateTranslatorSentences("Danish");
+    GenerateTranslatorSentences("Dutch");
+    GenerateTranslatorSentences("English");
+    GenerateTranslatorSentences("Esperanto");
+    GenerateTranslatorSentences("Finnish");
+    GenerateTranslatorSentences("French");
+    GenerateTranslatorSentences("German");
+    GenerateTranslatorSentences("Greek");
+    GenerateTranslatorSentences("Hungarian");
+    GenerateTranslatorSentences("Indonesian");
+    GenerateTranslatorSentences("Italian");
+    GenerateTranslatorSentences("Japanese");
+    GenerateTranslatorSentences("Japanese-en");
+    GenerateTranslatorSentences("Korean");
+    GenerateTranslatorSentences("Korean-en");
+    GenerateTranslatorSentences("Latvian");
+    GenerateTranslatorSentences("Lithuanian");
+    GenerateTranslatorSentences("Macedonian");
+    GenerateTranslatorSentences("Norwegian");
+    GenerateTranslatorSentences("Persian");
+    GenerateTranslatorSentences("Polish");
+    GenerateTranslatorSentences("Portuguese");
+    GenerateTranslatorSentences("Romanian");
+    GenerateTranslatorSentences("Russian");
+    GenerateTranslatorSentences("Serbian");
+    GenerateTranslatorSentences("SerbianCyrillic");
+    GenerateTranslatorSentences("Slovak");
+    GenerateTranslatorSentences("Slovene");
+    GenerateTranslatorSentences("Spanish");
+    GenerateTranslatorSentences("Swedish");
+    GenerateTranslatorSentences("Turkish");
+    GenerateTranslatorSentences("Ukrainian");
+    GenerateTranslatorSentences("Vietnamese");
 }
 
 
@@ -94,7 +123,7 @@ void GenerateTranslatorSentences(const QCString & sLang)
     // If the translator object exists, delete it. New one will
     // be created immediately.
     //
-    if (theTranslator != 0)
+    if (theTranslator != nullptr)
         delete theTranslator;
 
     // Set the language.
