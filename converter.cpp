@@ -1,18 +1,17 @@
-#include <qcstring.h>
-#include <qtextstream.h>
-#include "language.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 
-class QCString;
-class QTextStream;
+using namespace std;
 
 void GenerateAllTranslatorSentences();
-void WriteHeading(QTextStream & fout,
-                  const QCString & CountryName,
-                  const QCString & CharsetId);
-void WriteSentence(QTextStream & fout,
-                   const QCString & SentenceId,
-                   const QCString & SentenceBody);
-void GenerateTranslatorSentences(const QCString & sLang);
+void WriteHeading(ofstream & fout,
+                  const string & CountryName,
+                  const string & CharsetId);
+void WriteSentence(ofstream & fout,
+                   const string & SentenceId,
+                   const string & SentenceBody);
+void GenerateTranslatorSentences(const string & sLang);
 
 
 void GenerateAllTranslatorSentences()
@@ -62,9 +61,9 @@ void GenerateAllTranslatorSentences()
 }
 
 
-void WriteHeading(QTextStream & fout,
-                  const QCString & CountryName,
-                  const QCString & CharsetId)
+void WriteHeading(ofstream & fout,
+                  const string & CountryName,
+                  const string & CharsetId)
 {
     //???
     printf("<translator id=\"%s\"", CountryName);
@@ -72,25 +71,22 @@ void WriteHeading(QTextStream & fout,
 }
 
 
-void WriteSentence(QTextStream & fout,
-                   const QCString & SentenceId,
-                   const QCString & SentenceBody)
+void WriteSentence(ofstream & fout,
+                   const string & SentenceId,
+                   const string & SentenceBody)
 {   
     // Sentence beginning
-    //
     fout << "<sentence id=\"" << SentenceId << "\">";
     
     // Now output the body.
-    //
     fout << SentenceBody;
     
     // Close the definition.
-    //
     fout << "</sentence>\n";      
 }
 
 
-void GenerateTranslatorSentences(const QCString & sLang)
+void GenerateTranslatorSentences(const string & sLang)
 {
     fprintf(stderr, 
             "Generating sentence definitions for %s ... ", 
