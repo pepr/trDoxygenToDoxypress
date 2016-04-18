@@ -21,12 +21,36 @@
     <ClCompile Include="language.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xxx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="translator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="language.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_cz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_de.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_en.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_adapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xxx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qcstring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
