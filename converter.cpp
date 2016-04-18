@@ -1,27 +1,15 @@
 #include <fstream>
 #include <iostream>
+#include <list>
 #include <string>
 
 #include "xxx.h"
+#include "classdef.h"
 #include "language.h"
 #include "translator_en.h"
 
 using namespace std;
 
-
-///void WriteSentence(ofstream & fout,
-///                   const string & SentenceId,
-///                   const string & SentenceBody)
-///{
-///    // Sentence beginning
-///    fout << "<sentence id=\"" << SentenceId << "\">";
-///
-///    // Now output the body.
-///    fout << SentenceBody;
-///
-///    // Close the definition.
-///    fout << "</sentence>\n";
-///}
 
 #define WRITE_ELEMENT(method)\
 { \
@@ -86,6 +74,15 @@ using namespace std;
             "    </message>\n"; \
 }
 
+#define WRITE_ELEMENT1INT(method, arg)\
+{ \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "\">\n" \
+            "        <source>" << trEn.method(arg) << "</source>\n" \
+            "        <translation>" << theTranslator->method(arg) << "</translation>\n" \
+            "    </message>\n"; \
+}
+
 #define WRITE_ELEMENT2(method, a1, a2)\
 { \
     Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
@@ -94,6 +91,106 @@ using namespace std;
             "        <translation>" << theTranslator->method(a1, a2) << "</translation>\n" \
             "    </message>\n"; \
 }
+
+#define WRITE_ELEMENT_COMPOUNDTYPE_F(method)\
+{ \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    std::string result{ "Undefined" }; \
+    for (auto compType: list<ClassDef::CompoundType>{ ClassDef::Class, ClassDef::Struct, ClassDef::Union, ClassDef::Interface, \
+	                      ClassDef::Protocol, ClassDef::Category, ClassDef::Exception }) { \
+		switch (compType)                                       \
+		{														\
+		case ClassDef::Class:      result = "Class"; break;		\
+		case ClassDef::Struct:     result = "Struct"; break;	\
+		case ClassDef::Union:      result = "Union"; break;		\
+		case ClassDef::Interface:  result = "Interface"; break;	\
+		case ClassDef::Protocol:   result = "Protocol"; break;	\
+		case ClassDef::Category:   result = "Category"; break;	\
+		case ClassDef::Exception:  result = "Exception"; break;	\
+		default: break;											\
+		}														\
+        fout << "    <message method=\"" #method << result << "F\">\n" \
+                "        <source>" << trEn.method(compType, false) << "</source>\n" \
+                "        <translation>" << theTranslator->method(compType, false) << "</translation>\n" \
+                "    </message>\n"; \
+	} \
+}
+
+
+#define WRITE_ELEMENT_COMPOUNDTYPE_T(method)\
+{ \
+    Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
+    std::string result{ "Undefined" }; \
+    for (auto compType: list<ClassDef::CompoundType>{ ClassDef::Class, ClassDef::Struct, ClassDef::Union, ClassDef::Interface, \
+	                      ClassDef::Protocol, ClassDef::Category, ClassDef::Exception }) { \
+		switch (compType)                                       \
+		{														\
+		case ClassDef::Class:      result = "Class"; break;		\
+		case ClassDef::Struct:     result = "Struct"; break;	\
+		case ClassDef::Union:      result = "Union"; break;		\
+		case ClassDef::Interface:  result = "Interface"; break;	\
+		case ClassDef::Protocol:   result = "Protocol"; break;	\
+		case ClassDef::Category:   result = "Category"; break;	\
+		case ClassDef::Exception:  result = "Exception"; break;	\
+		default: break;											\
+		}														\
+        fout << "    <message method=\"" #method << result << "T\">\n" \
+                "        <source>" << trEn.method(compType, false) << "</source>\n" \
+                "        <translation>" << theTranslator->method(compType, false) << "</translation>\n" \
+                "    </message>\n"; \
+	} \
+}
+
+
+#define WRITE_ELEMENT_COMPOUNDTYPE_1_F(method, a1)\
+{ \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    std::string result{ "Undefined" }; \
+    for (auto compType: list<ClassDef::CompoundType>{ ClassDef::Class, ClassDef::Struct, ClassDef::Union, ClassDef::Interface, \
+	                      ClassDef::Protocol, ClassDef::Category, ClassDef::Exception }) { \
+		switch (compType)                                       \
+		{														\
+		case ClassDef::Class:      result = "Class"; break;		\
+		case ClassDef::Struct:     result = "Struct"; break;	\
+		case ClassDef::Union:      result = "Union"; break;		\
+		case ClassDef::Interface:  result = "Interface"; break;	\
+		case ClassDef::Protocol:   result = "Protocol"; break;	\
+		case ClassDef::Category:   result = "Category"; break;	\
+		case ClassDef::Exception:  result = "Exception"; break;	\
+		default: break;											\
+		}														\
+        fout << "    <message method=\"" #method << result << "F\">\n" \
+                "        <source>" << trEn.method(a1, compType, false) << "</source>\n" \
+                "        <translation>" << theTranslator->method(a1, compType, false) << "</translation>\n" \
+                "    </message>\n"; \
+	} \
+}
+
+
+#define WRITE_ELEMENT_COMPOUNDTYPE_1_T(method, a1)\
+{ \
+    Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
+    std::string result{ "Undefined" }; \
+    for (auto compType: list<ClassDef::CompoundType>{ ClassDef::Class, ClassDef::Struct, ClassDef::Union, ClassDef::Interface, \
+	                      ClassDef::Protocol, ClassDef::Category, ClassDef::Exception }) { \
+		switch (compType)                                       \
+		{														\
+		case ClassDef::Class:      result = "Class"; break;		\
+		case ClassDef::Struct:     result = "Struct"; break;	\
+		case ClassDef::Union:      result = "Union"; break;		\
+		case ClassDef::Interface:  result = "Interface"; break;	\
+		case ClassDef::Protocol:   result = "Protocol"; break;	\
+		case ClassDef::Category:   result = "Category"; break;	\
+		case ClassDef::Exception:  result = "Exception"; break;	\
+		default: break;											\
+		}														\
+        fout << "    <message method=\"" #method << result << "T\">\n" \
+                "        <source>" << trEn.method(a1, compType, false) << "</source>\n" \
+                "        <translation>" << theTranslator->method(a1, compType, false) << "</translation>\n" \
+                "    </message>\n"; \
+	} \
+}
+
 
 void GenerateTranslatorSentences(const string & sLang)
 {
@@ -1123,84 +1220,89 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trExceptions);
     WRITE_ELEMENT(trGeneratedBy);
 
-#if 0
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990307
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trNamespaceList() = 0;
-    WRITE_ELEMENT(trNamespaceListDescription(bool extractAll) = 0;
-    WRITE_ELEMENT(trFriends() = 0;
+    WRITE_ELEMENT(trNamespaceList);
+	
+	WRITE_ELEMENT_F(trNamespaceListDescription);
+	WRITE_ELEMENT_T(trNamespaceListDescription);
+	
+	WRITE_ELEMENT(trFriends);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990405
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trRelatedFunctionDocumentation() = 0;
+    WRITE_ELEMENT(trRelatedFunctionDocumentation);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990425
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trCompoundReference(const char *clName,
-        ClassDef::CompoundType compType,
-        bool isTemplate) = 0;
+	WRITE_ELEMENT_COMPOUNDTYPE_1_F(trCompoundReference, "%1");
+	WRITE_ELEMENT_COMPOUNDTYPE_1_T(trCompoundReference, "%1");
 
-    WRITE_ELEMENT(trFileReference(const char *fileName) = 0;
-    WRITE_ELEMENT(trNamespaceReference(const char *namespaceName) = 0;
+	WRITE_ELEMENT1(trFileReference, "%1");
+    WRITE_ELEMENT1(trNamespaceReference, "%1");
 
-    WRITE_ELEMENT(trPublicMembers() = 0;
-    WRITE_ELEMENT(trPublicSlots() = 0;
-    WRITE_ELEMENT(trSignals() = 0;
-    WRITE_ELEMENT(trStaticPublicMembers() = 0;
-    WRITE_ELEMENT(trProtectedMembers() = 0;
-    WRITE_ELEMENT(trProtectedSlots() = 0;
-    WRITE_ELEMENT(trStaticProtectedMembers() = 0;
-    WRITE_ELEMENT(trPrivateMembers() = 0;
-    WRITE_ELEMENT(trPrivateSlots() = 0;
-    WRITE_ELEMENT(trStaticPrivateMembers() = 0;
-    WRITE_ELEMENT(trWriteList(int numEntries) = 0;
-    WRITE_ELEMENT(trInheritsList(int numEntries) = 0;
-    WRITE_ELEMENT(trInheritedByList(int numEntries) = 0;
-    WRITE_ELEMENT(trReimplementedFromList(int numEntries) = 0;
-    WRITE_ELEMENT(trReimplementedInList(int numEntries) = 0;
-    WRITE_ELEMENT(trNamespaceMembers() = 0;
-    WRITE_ELEMENT(trNamespaceMemberDescription(bool extractAll) = 0;
-    WRITE_ELEMENT(trNamespaceIndex() = 0;
-    WRITE_ELEMENT(trNamespaceDocumentation() = 0;
+    WRITE_ELEMENT(trPublicMembers);
+    WRITE_ELEMENT(trPublicSlots);
+    WRITE_ELEMENT(trSignals);
+    WRITE_ELEMENT(trStaticPublicMembers);
+    WRITE_ELEMENT(trProtectedMembers);
+    WRITE_ELEMENT(trProtectedSlots);
+    WRITE_ELEMENT(trStaticProtectedMembers);
+    WRITE_ELEMENT(trPrivateMembers);
+    WRITE_ELEMENT(trPrivateSlots);
+    WRITE_ELEMENT(trStaticPrivateMembers);
+    WRITE_ELEMENT1INT(trWriteList, 1);
+    WRITE_ELEMENT1INT(trInheritsList, 1);
+    WRITE_ELEMENT1INT(trInheritedByList, 1);
+    WRITE_ELEMENT1INT(trReimplementedFromList, 1);
+    WRITE_ELEMENT1INT(trReimplementedInList, 1);
+    WRITE_ELEMENT(trNamespaceMembers);
+
+	WRITE_ELEMENT_F(trNamespaceMemberDescription);
+	WRITE_ELEMENT_T(trNamespaceMemberDescription);
+
+	WRITE_ELEMENT(trNamespaceIndex);
+    WRITE_ELEMENT(trNamespaceDocumentation);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990522
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trNamespaces() = 0;
+    WRITE_ELEMENT(trNamespaces);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990728
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trGeneratedFromFiles(ClassDef::CompoundType compType,
-        bool single) = 0;
-    //virtual QCString trAlphabeticalList() = 0;
+	WRITE_ELEMENT_COMPOUNDTYPE_F(trGeneratedFromFiles);
+	WRITE_ELEMENT_COMPOUNDTYPE_T(trGeneratedFromFiles);
+	//virtual QCString trAlphabeticalList() = 0;
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990901
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trReturnValues() = 0;
-    WRITE_ELEMENT(trMainPage() = 0;
-    WRITE_ELEMENT(trPageAbbreviation() = 0;
+    WRITE_ELEMENT(trReturnValues);
+    WRITE_ELEMENT(trMainPage);
+    WRITE_ELEMENT(trPageAbbreviation);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-991003
     //////////////////////////////////////////////////////////////////////////
 
     //virtual QCString trSources() = 0;
-    WRITE_ELEMENT(trDefinedAtLineInSourceFile() = 0;
-    WRITE_ELEMENT(trDefinedInSourceFile() = 0;
+    WRITE_ELEMENT(trDefinedAtLineInSourceFile);
+    WRITE_ELEMENT(trDefinedInSourceFile);
 
-    //////////////////////////////////////////////////////////////////////////
+#if 0
+	//////////////////////////////////////////////////////////////////////////
     // new since 0.49-991205
     //////////////////////////////////////////////////////////////////////////
 
