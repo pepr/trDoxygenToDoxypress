@@ -62,7 +62,7 @@ bool setTranslator(const std::string & langName)
 {
   if (L_EQUAL("english"))
   {
-    theTranslator=new TranslatorEnglish;
+      theTranslator=new TranslatorEnglish;
   }
   else if (L_EQUAL("czech"))
   {

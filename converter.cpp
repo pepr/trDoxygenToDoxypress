@@ -4,104 +4,48 @@
 
 #include "xxx.h"
 #include "language.h"
+#include "translator_en.h"
 
 using namespace std;
 
-void GenerateAllTranslatorSentences();
-void WriteHeading(ofstream & fout,
-                  const string & CountryName);
-void WriteSentence(ofstream & fout,
-                   const string & SentenceId,
-                   const string & SentenceBody);
-void GenerateTranslatorSentences(const string & sLang);
 
+///void WriteSentence(ofstream & fout,
+///                   const string & SentenceId,
+///                   const string & SentenceBody)
+///{   
+///    // Sentence beginning
+///    fout << "<sentence id=\"" << SentenceId << "\">";
+///    
+///    // Now output the body.
+///    fout << SentenceBody;
+///    
+///    // Close the definition.
+///    fout << "</sentence>\n";      
+///}
 
-void GenerateAllTranslatorSentences()
-{
-    GenerateTranslatorSentences("Afrikaans");
-    GenerateTranslatorSentences("Arabic");
-    GenerateTranslatorSentences("Armenian");
-    GenerateTranslatorSentences("Brazilian Portuguese");
-    GenerateTranslatorSentences("Catalan");
-    GenerateTranslatorSentences("Chinese");
-    GenerateTranslatorSentences("Chinese Traditional");
-    GenerateTranslatorSentences("Croatian");
-    GenerateTranslatorSentences("Czech");
-    GenerateTranslatorSentences("Danish");
-    GenerateTranslatorSentences("Dutch");
-    GenerateTranslatorSentences("English");
-    GenerateTranslatorSentences("Esperanto");
-    GenerateTranslatorSentences("Finnish");
-    GenerateTranslatorSentences("French");
-    GenerateTranslatorSentences("German");
-    GenerateTranslatorSentences("Greek");
-    GenerateTranslatorSentences("Hungarian");
-    GenerateTranslatorSentences("Indonesian");
-    GenerateTranslatorSentences("Italian");
-    GenerateTranslatorSentences("Japanese");
-    GenerateTranslatorSentences("Japanese-en");
-    GenerateTranslatorSentences("Korean");
-    GenerateTranslatorSentences("Korean-en");
-    GenerateTranslatorSentences("Latvian");
-    GenerateTranslatorSentences("Lithuanian");
-    GenerateTranslatorSentences("Macedonian");
-    GenerateTranslatorSentences("Norwegian");
-    GenerateTranslatorSentences("Persian");
-    GenerateTranslatorSentences("Polish");
-    GenerateTranslatorSentences("Portuguese");
-    GenerateTranslatorSentences("Romanian");
-    GenerateTranslatorSentences("Russian");
-    GenerateTranslatorSentences("Serbian");
-    GenerateTranslatorSentences("SerbianCyrillic");
-    GenerateTranslatorSentences("Slovak");
-    GenerateTranslatorSentences("Slovene");
-    GenerateTranslatorSentences("Spanish");
-    GenerateTranslatorSentences("Swedish");
-    GenerateTranslatorSentences("Turkish");
-    GenerateTranslatorSentences("Ukrainian");
-    GenerateTranslatorSentences("Vietnamese");
-}
-
-
-void WriteHeading(ofstream & fout,
-                  const string & CountryName)
-{
-    //???
-    fout << "Country name: " << CountryName << "\n";
-}
-
-
-void WriteSentence(ofstream & fout,
-                   const string & SentenceId,
-                   const string & SentenceBody)
-{   
-    // Sentence beginning
-    fout << "<sentence id=\"" << SentenceId << "\">";
-    
-    // Now output the body.
-    fout << SentenceBody;
-    
-    // Close the definition.
-    fout << "</sentence>\n";      
+#define WRITE_ELEMENT(SentenceId)\
+{ \
+    fout << "    <message method=\"" #SentenceId "\">\n" \
+            "        <source>" << trEn.SentenceId() << "</source>\n" \
+            "        <translation>" << theTranslator->SentenceId() << "</translation>\n" \
+            "    </message>\n"; \
 }
 
 
 void GenerateTranslatorSentences(const string & sLang)
 {
-    fprintf(stderr, 
-            "Generating sentence definitions for %s ... ", 
-            sLang.data());
+    cerr << "Generating sentence definitions for " << sLang << " ... ";
             
     // Construct the File Name.
-    string Filename("Translator_" + sLang + ".xml");
+    string fname{ "doxy_" + sLang + ".ts2" };
 
     // Open the file for writing.
-    ofstream  fout(Filename);
+    ofstream  fout(fname);
 
     // If the file could not be open, finish with error message.
     if (! fout.is_open())
     {
-        cerr << "Open for output to " << Filename << " failed.\n";
+        cerr << "Open for output to " << fname << " failed.\n";
         exit(1);
     }
     
@@ -109,18 +53,21 @@ void GenerateTranslatorSentences(const string & sLang)
     //
     // If the translator object exists, delete it. New one will
     // be created immediately.
-    //
     if (theTranslator != nullptr)
         delete theTranslator;
 
     // Set the language.
     setTranslator(sLang);
-    
-    // Generate Sentence definitions for all translator methods.
-    // Created for version 1.2.12
-    //
-    WriteHeading(fout, theTranslator->idLanguage());
-    
+    TranslatorEnglish trEn;
+
+    //------------------------------------------------------------------------------------
+    fout << "Language id: " << sLang << "\n";
+    fout << "<context>\n"
+            "    <name>doxy-text</name>\n";
+
+    //WRITE_ELEMENT(idLanguage);
+
+#if 0
     fout << "<!-- Simple sentences -->\n\n";
 
     WriteSentence(fout, "trReferences",
@@ -975,19 +922,14 @@ void GenerateTranslatorSentences(const string & sLang)
 
     WriteSentence(fout, "trReimplementedInList", s);
     //-----------------------------------------------------------------
-    
-    fout << "\n<!-- (end) -->\n";
-    
-    // Close the output file.
-    //
-    fout.close();
+#endif
 
-    std::cerr << "\n";
 
 //////////////////////////////////////////
-#if 0
 // --- Language control methods -------------------
 
+    WRITE_ELEMENT(idLanguage);
+#if 0
     virtual QCString idLanguage() = 0;
     virtual QCString latexLanguageSupportCommand() = 0;
 
@@ -1521,6 +1463,17 @@ void GenerateTranslatorSentences(const string & sLang)
     virtual QCString trSingletonGeneratedFromFiles(bool single) = 0;
 
 #endif
+
+    fout << "\n<!-- (end) -->\n";
+
+    fout << "</context>\n";
+
+    // Close the output file.
+    //
+    fout.close();
+
+    std::cerr << "\n";
+
 }
 
 
@@ -1530,6 +1483,50 @@ int main()
 	GenerateTranslatorSentences("german");
 	GenerateTranslatorSentences("czech");
 	GenerateTranslatorSentences("dutch");
+
+    /// GenerateTranslatorSentences("afrikaans");
+    /// GenerateTranslatorSentences("arabic");
+    /// GenerateTranslatorSentences("armenian");
+    /// GenerateTranslatorSentences("brazilian");
+    /// GenerateTranslatorSentences("catalan");
+    /// GenerateTranslatorSentences("chinese");
+    /// GenerateTranslatorSentences("chinese-traditional");
+    /// GenerateTranslatorSentences("croatian");
+    /// GenerateTranslatorSentences("czech");
+    /// GenerateTranslatorSentences("danish");
+    /// GenerateTranslatorSentences("dutch");
+    /// GenerateTranslatorSentences("english");
+    /// GenerateTranslatorSentences("esperanto");
+    /// GenerateTranslatorSentences("finnish");
+    /// GenerateTranslatorSentences("french");
+    /// GenerateTranslatorSentences("german");
+    /// GenerateTranslatorSentences("greek");
+    /// GenerateTranslatorSentences("hungarian");
+    /// GenerateTranslatorSentences("indonesian");
+    /// GenerateTranslatorSentences("italian");
+    /// GenerateTranslatorSentences("japanese");
+    /// GenerateTranslatorSentences("japanese-en");
+    /// GenerateTranslatorSentences("korean");
+    /// GenerateTranslatorSentences("korean-en");
+    /// GenerateTranslatorSentences("latvian");
+    /// GenerateTranslatorSentences("lithuanian");
+    /// GenerateTranslatorSentences("macedonian");
+    /// GenerateTranslatorSentences("norwegian");
+    /// GenerateTranslatorSentences("persian");
+    /// GenerateTranslatorSentences("polish");
+    /// GenerateTranslatorSentences("portuguese");
+    /// GenerateTranslatorSentences("romanian");
+    /// GenerateTranslatorSentences("russian");
+    /// GenerateTranslatorSentences("serbian");
+    /// GenerateTranslatorSentences("serbian-cyrillic");
+    /// GenerateTranslatorSentences("slovak");
+    /// GenerateTranslatorSentences("slovene");
+    /// GenerateTranslatorSentences("spanish");
+    /// GenerateTranslatorSentences("swedish");
+    /// GenerateTranslatorSentences("turkish");
+    /// GenerateTranslatorSentences("ukrainian");
+    /// GenerateTranslatorSentences("vietnamese");
+
 
 	return 0;
 }
