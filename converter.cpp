@@ -74,6 +74,16 @@ using namespace std;
             "    </message>\n"; \
 }
 
+#define WRITE_ELEMENT1REF(method, arg)\
+{ \
+    QCString a{arg}; \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "\">\n" \
+            "        <source>" << trEn.method(a) << "</source>\n" \
+            "        <translation>" << theTranslator->method(a) << "</translation>\n" \
+            "    </message>\n"; \
+}
+
 #define WRITE_ELEMENT1INT(method, arg)\
 { \
     Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
@@ -190,6 +200,29 @@ using namespace std;
                 "    </message>\n"; \
 	} \
 }
+
+
+#define WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(method)\
+{ \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "-FirstCapitalSingular\">\n" \
+            "        <source>" << trEn.method(true, true) << "</source>\n" \
+            "        <translation>" << theTranslator->method(true, true) << "</translation>\n" \
+            "    </message>\n"; \
+    fout << "    <message method=\"" #method "-FirstCapitalPlural\">\n" \
+            "        <source>" << trEn.method(true, false) << "</source>\n" \
+            "        <translation>" << theTranslator->method(true, false) << "</translation>\n" \
+            "    </message>\n"; \
+    fout << "    <message method=\"" #method "-FirstSmallSingular\">\n" \
+            "        <source>" << trEn.method(false, true) << "</source>\n" \
+            "        <translation>" << theTranslator->method(false, true) << "</translation>\n" \
+            "    </message>\n"; \
+    fout << "    <message method=\"" #method "-FirstSmallPlural\">\n" \
+            "        <source>" << trEn.method(false, false) << "</source>\n" \
+            "        <translation>" << theTranslator->method(false, false) << "</translation>\n" \
+            "    </message>\n"; \
+}
+
 
 
 void GenerateTranslatorSentences(const string & sLang)
@@ -1301,79 +1334,81 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trDefinedAtLineInSourceFile);
     WRITE_ELEMENT(trDefinedInSourceFile);
 
-#if 0
 	//////////////////////////////////////////////////////////////////////////
     // new since 0.49-991205
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trDeprecated() = 0;
+    WRITE_ELEMENT(trDeprecated);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.0.0
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trCollaborationDiagram(const char *clName) = 0;
-    WRITE_ELEMENT(trInclDepGraph(const char *fName) = 0;
-    WRITE_ELEMENT(trConstructorDocumentation() = 0;
-    WRITE_ELEMENT(trGotoSourceCode() = 0;
-    WRITE_ELEMENT(trGotoDocumentation() = 0;
-    WRITE_ELEMENT(trPrecondition() = 0;
-    WRITE_ELEMENT(trPostcondition() = 0;
-    WRITE_ELEMENT(trInvariant() = 0;
-    WRITE_ELEMENT(trInitialValue() = 0;
-    WRITE_ELEMENT(trCode() = 0;
+    WRITE_ELEMENT1(trCollaborationDiagram, "%1");
+    WRITE_ELEMENT1(trInclDepGraph, "%1");
+    WRITE_ELEMENT(trConstructorDocumentation);
+    WRITE_ELEMENT(trGotoSourceCode);
+    WRITE_ELEMENT(trGotoDocumentation);
+    WRITE_ELEMENT(trPrecondition);
+    WRITE_ELEMENT(trPostcondition);
+    WRITE_ELEMENT(trInvariant);
+    WRITE_ELEMENT(trInitialValue);
+    WRITE_ELEMENT(trCode);
 
-    WRITE_ELEMENT(trGraphicalHierarchy() = 0;
-    WRITE_ELEMENT(trGotoGraphicalHierarchy() = 0;
-    WRITE_ELEMENT(trGotoTextualHierarchy() = 0;
-    WRITE_ELEMENT(trPageIndex() = 0;
+    WRITE_ELEMENT(trGraphicalHierarchy);
+    WRITE_ELEMENT(trGotoGraphicalHierarchy);
+    WRITE_ELEMENT(trGotoTextualHierarchy);
+    WRITE_ELEMENT(trPageIndex);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.1.0
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trNote() = 0;
-    WRITE_ELEMENT(trPublicTypes() = 0;
-    WRITE_ELEMENT(trPublicAttribs() = 0; // C
-    WRITE_ELEMENT(trStaticPublicAttribs() = 0;
-    WRITE_ELEMENT(trProtectedTypes() = 0;
-    WRITE_ELEMENT(trProtectedAttribs() = 0;
-    WRITE_ELEMENT(trStaticProtectedAttribs() = 0;
-    WRITE_ELEMENT(trPrivateTypes() = 0;
-    WRITE_ELEMENT(trPrivateAttribs() = 0;
-    WRITE_ELEMENT(trStaticPrivateAttribs() = 0;
+    WRITE_ELEMENT(trNote);
+    WRITE_ELEMENT(trPublicTypes);
+
+	WRITE_ELEMENT(trPublicAttribs);
+	WRITE_ELEMENT_C(trPublicAttribs); // C
+
+	WRITE_ELEMENT(trStaticPublicAttribs);
+    WRITE_ELEMENT(trProtectedTypes);
+    WRITE_ELEMENT(trProtectedAttribs);
+    WRITE_ELEMENT(trStaticProtectedAttribs);
+    WRITE_ELEMENT(trPrivateTypes);
+    WRITE_ELEMENT(trPrivateAttribs);
+    WRITE_ELEMENT(trStaticPrivateAttribs);
 
     /////////////////////////////////////////////////////////////trClasses/////////////
     // new since 1.1.3
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trTodo() = 0;
-    WRITE_ELEMENT(trTodoList() = 0;
+    WRITE_ELEMENT(trTodo);
+    WRITE_ELEMENT(trTodoList);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.1.4
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trReferencedBy() = 0;
-    WRITE_ELEMENT(trRemarks() = 0;
-    WRITE_ELEMENT(trAttention() = 0;
-    WRITE_ELEMENT(trInclByDepGraph() = 0;
-    WRITE_ELEMENT(trSince() = 0;
+    WRITE_ELEMENT(trReferencedBy);
+    WRITE_ELEMENT(trRemarks);
+    WRITE_ELEMENT(trAttention);
+    WRITE_ELEMENT(trInclByDepGraph);
+    WRITE_ELEMENT(trSince);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.1.5
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trLegendTitle() = 0;
-    WRITE_ELEMENT(trLegendDocs() = 0;
-    WRITE_ELEMENT(trLegend() = 0;
+    WRITE_ELEMENT(trLegendTitle);
+    WRITE_ELEMENT(trLegendDocs);
+    WRITE_ELEMENT(trLegend);
 
-    //////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////
     // new since 1.2.0
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trTest() = 0;
-    WRITE_ELEMENT(trTestList() = 0;
+    WRITE_ELEMENT(trTest);
+    WRITE_ELEMENT(trTestList);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.1
@@ -1385,28 +1420,32 @@ void GenerateTranslatorSentences(const string & sLang)
     // new since 1.2.2
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trProperties() = 0;
-    WRITE_ELEMENT(trPropertyDocumentation() = 0;
+    WRITE_ELEMENT(trProperties);
+    WRITE_ELEMENT(trPropertyDocumentation);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.4
     //////////////////////////////////////////////////////////////////////////
 
     //virtual QCString trInterfaces() = 0;
-    WRITE_ELEMENT(trClasses() = 0; // C
-    WRITE_ELEMENT(trPackage(const char *name) = 0;
-    WRITE_ELEMENT(trPackageList() = 0;
-    WRITE_ELEMENT(trPackageListDescription() = 0;
-    WRITE_ELEMENT(trPackages() = 0;
+
+	WRITE_ELEMENT(trClasses);
+	WRITE_ELEMENT_C(trClasses); // C
+
+
+    WRITE_ELEMENT1(trPackage, "%1");
+    WRITE_ELEMENT(trPackageList);
+    WRITE_ELEMENT(trPackageListDescription);
+    WRITE_ELEMENT(trPackages);
     //virtual QCString trPackageDocumentation() = 0;
-    WRITE_ELEMENT(trDefineValue() = 0;
+    WRITE_ELEMENT(trDefineValue);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.5
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trBug() = 0;
-    WRITE_ELEMENT(trBugList() = 0;
+    WRITE_ELEMENT(trBug);
+    WRITE_ELEMENT(trBugList);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.6
@@ -1438,7 +1477,7 @@ void GenerateTranslatorSentences(const string & sLang)
     * </pre>
     *
     */
-    WRITE_ELEMENT(trRTFansicp() = 0;
+    WRITE_ELEMENT(trRTFansicp);
 
     /*! Character sets
     *  <pre>
@@ -1468,102 +1507,103 @@ void GenerateTranslatorSentences(const string & sLang)
     * 255 — OEM
     * </pre>
     */
-    WRITE_ELEMENT(trRTFCharSet() = 0;
-    WRITE_ELEMENT(trRTFGeneralIndex() = 0;
+    WRITE_ELEMENT(trRTFCharSet);
+    WRITE_ELEMENT(trRTFGeneralIndex);
 
     // Translation of the word
 
-    WRITE_ELEMENT(trClass(bool first_capital, bool singular) = 0;
-    WRITE_ELEMENT(trFile(bool first_capital, bool singular) = 0;
-    WRITE_ELEMENT(trNamespace(bool first_capital, bool singular) = 0;
-    WRITE_ELEMENT(trGroup(bool first_capital, bool singular) = 0;
-    WRITE_ELEMENT(trPage(bool first_capital, bool singular) = 0;
-    WRITE_ELEMENT(trMember(bool first_capital, bool singular) = 0;
+    WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trClass);
+	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trFile);
+	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trNamespace);
+	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trGroup);
+	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trPage);
+	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trMember);
     //virtual QCString trField(bool first_capital, bool singular) = 0;
-    WRITE_ELEMENT(trGlobal(bool first_capital, bool singular) = 0;
+	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trGlobal);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.7
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trAuthor(bool first_capital, bool singular) = 0;
+	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trAuthor);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.11
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trReferences() = 0;
+    WRITE_ELEMENT(trReferences);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.13
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trImplementedFromList(int numEntries) = 0;
-    WRITE_ELEMENT(trImplementedInList(int numEntries) = 0;
+    WRITE_ELEMENT1INT(trImplementedFromList, 1);
+    WRITE_ELEMENT1INT(trImplementedInList, 1);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.16
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trRTFTableOfContents() = 0;
+    WRITE_ELEMENT(trRTFTableOfContents);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.17
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trDeprecatedList() = 0;
+    WRITE_ELEMENT(trDeprecatedList);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.18
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trEvents() = 0;
-    WRITE_ELEMENT(trEventDocumentation() = 0;
+    WRITE_ELEMENT(trEvents);
+    WRITE_ELEMENT(trEventDocumentation);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.3
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trPackageTypes() = 0;
-    WRITE_ELEMENT(trPackageMembers() = 0;
-    WRITE_ELEMENT(trStaticPackageMembers() = 0;
-    WRITE_ELEMENT(trPackageAttribs() = 0;
-    WRITE_ELEMENT(trStaticPackageAttribs() = 0;
+    WRITE_ELEMENT(trPackageTypes);
+    WRITE_ELEMENT(trPackageMembers);
+    WRITE_ELEMENT(trStaticPackageMembers);
+    WRITE_ELEMENT(trPackageAttribs);
+    WRITE_ELEMENT(trStaticPackageAttribs);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.3.1
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trAll() = 0;
-    WRITE_ELEMENT(trCallGraph() = 0;
+    WRITE_ELEMENT(trAll);
+    WRITE_ELEMENT(trCallGraph);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.3.3
     //////////////////////////////////////////////////////////////////////////
 
-    //virtual QCString trSearchForIndex() = 0;
-    WRITE_ELEMENT(trSearchResultsTitle() = 0;
-    WRITE_ELEMENT(trSearchResults(int numDocuments) = 0;
-    WRITE_ELEMENT(trSearchMatches() = 0;
+    //virtual QCString trSearchForIndex);
+    WRITE_ELEMENT(trSearchResultsTitle);
+    WRITE_ELEMENT1INT(trSearchResults, 1);
+    WRITE_ELEMENT(trSearchMatches);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.3.8
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trSourceFile(QCString& filename) = 0;
+	WRITE_ELEMENT1REF(trSourceFile, "%1");
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.3.9
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trDirIndex() = 0;
-    WRITE_ELEMENT(trDirDocumentation() = 0;
-    WRITE_ELEMENT(trDirectories() = 0;
-    WRITE_ELEMENT(trDirDescription() = 0;
-    WRITE_ELEMENT(trDirReference(const char *dirName) = 0;
-    WRITE_ELEMENT(trDir(bool first_capital, bool singular) = 0;
+    WRITE_ELEMENT(trDirIndex);
+    WRITE_ELEMENT(trDirDocumentation);
+    WRITE_ELEMENT(trDirectories);
+    WRITE_ELEMENT(trDirDescription);
+    WRITE_ELEMENT1(trDirReference, "%1");
+    WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trDir);
 
-    //////////////////////////////////////////////////////////////////////////
+#if 0
+	//////////////////////////////////////////////////////////////////////////
     // new since 1.4.1
     //////////////////////////////////////////////////////////////////////////
 
