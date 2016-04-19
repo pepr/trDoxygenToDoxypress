@@ -1,0 +1,380 @@
+<?xml encoding="iso-8859-1"?>
+<!-- dutch -->
+
+<!-- Simple entities -->
+
+<!ENTITY trAlphabeticalList "Alphabetical List" >
+<!ENTITY idLanguage "dutch" >
+<!ENTITY latexLanguageSupportCommand <![CDATA[\usepackage[dutch]{babel}
+]]> >
+<!ENTITY idLanguageCharset "iso-8859-1" >
+<!ENTITY trRelatedFunctions "Gerelateerde functies" >
+<!ENTITY trRelatedSubscript "(Merk op dat dit geen member functies zijn.)" >
+<!ENTITY trDetailedDescription "Gedetailleerde Beschrijving" >
+<!ENTITY trMemberTypedefDocumentation "Documentatie van type definitie members" >
+<!ENTITY trMemberEnumerationDocumentation "Documentatie van enumeratie members" >
+<!ENTITY trMemberFunctionDocumentation "Documentatie van functie members" >
+<!ENTITY trMemberDataDocumentationC "Documentatie van data members" >
+<!ENTITY trMemberDataDocumentation "Documentatie van data members" >
+<!ENTITY trMore "Meer..." >
+<!ENTITY trListOfAllMembers "Lijst van alle members." >
+<!ENTITY trMemberList "Member Lijst" >
+<!ENTITY trEnumName "enum naam" >
+<!ENTITY trEnumValue "enum waarde" >
+<!ENTITY trDefinedIn "gedefinieerd in" >
+<!ENTITY trModules "Modules" >
+<!ENTITY trClassHierarchy "Klasse Hi&euml;rarchie" >
+<!ENTITY trCompoundListC "Compound Lijst" >
+<!ENTITY trCompoundList "Compound Lijst" >
+<!ENTITY trFileList "File Lijst" >
+<!ENTITY trHeaderFilesC "Header Lijst" >
+<!ENTITY trHeaderFiles "Header Lijst" >
+<!ENTITY trCompoundMembers "Compound Members" >
+<!ENTITY trFileMembersC "File members" >
+<!ENTITY trFileMembers "File members" >
+<!ENTITY trRelatedPages "Gerelateerde pagina's" >
+<!ENTITY trExamples "Voorbeelden" >
+<!ENTITY trSearch "Zoeken" >
+<!ENTITY trClassHierarchyDescription "Deze inheritance lijst is min of meer alfabetisch gesorteerd:" >
+<!ENTITY trCompoundListDescriptionC "Hieronder volgen de klassen, structs en unions met voor elk een korte beschrijving:" >
+<!ENTITY trCompoundListDescription "Hieronder volgen de klassen, structs en unions met voor elk een korte beschrijving:" >
+<!ENTITY trHeaderFilesDescription "Hieronder volgen de header files die de API vormen:" >
+<!ENTITY trExamplesDescription "Hieronder volgt de lijst met alle voorbeelden:" >
+<!ENTITY trRelatedPagesDescription "Hieronder volgt de lijst met alle pagina's die gerelateerde documentatie bevatten:" >
+<!ENTITY trModulesDescription "Hieronder volgt de lijst met alle modules:" >
+<!ENTITY trNoDescriptionAvailable "Geen korte beschrijving beschikbaar" >
+<!ENTITY trDocumentation "Documentatie" >
+<!ENTITY trModuleIndex "Module Index" >
+<!ENTITY trHierarchicalIndex "Hi&euml;rarchische Index" >
+<!ENTITY trCompoundIndexC "Compound Index" >
+<!ENTITY trCompoundIndex "Compound Index" >
+<!ENTITY trFileIndex "File Index" >
+<!ENTITY trModuleDocumentation "Module Documentatie" >
+<!ENTITY trClassDocumentationC "Klassen Documentatie" >
+<!ENTITY trClassDocumentation "Klassen Documentatie" >
+<!ENTITY trFileDocumentation "File Documentatie" >
+<!ENTITY trExampleDocumentation "Documentatie van voorbeelden" >
+<!ENTITY trPageDocumentation "Documentatie van gerelateerde pagina's" >
+<!ENTITY trReferenceManual "Naslagwerk" >
+<!ENTITY trDefines "Defines" >
+<!ENTITY trFuncProtos "Functie Prototypes" >
+<!ENTITY trTypedefs "Typedefs" >
+<!ENTITY trEnumerations "Enumeraties" >
+<!ENTITY trFunctions "Functies" >
+<!ENTITY trVariables "Variabelen" >
+<!ENTITY trEnumerationValues "Enumeratie waarden" >
+<!ENTITY trDefineDocumentation "Documentatie van defines" >
+<!ENTITY trFunctionPrototypeDocumentation "Documentatie van functie Prototypes" >
+<!ENTITY trTypedefDocumentation "Documentatie van typedefs" >
+<!ENTITY trEnumerationTypeDocumentation "Documentatie van enumeratie types" >
+<!ENTITY trEnumerationValueDocumentation "Documentatie van enumeratie waarden" >
+<!ENTITY trFunctionDocumentation "Documentatie van functies" >
+<!ENTITY trVariableDocumentation "Documentatie van variabelen" >
+<!ENTITY trCompoundsC "Compounds" >
+<!ENTITY trCompounds "Compounds" >
+<!ENTITY trWrittenBy "geschreven door" >
+<!ENTITY trForInternalUseOnly "Alleen voor intern gebruik." >
+<!ENTITY trReimplementedForInternalReasons "Om interne rederene opnieuwd ge&iuml;mplemented; de API wordt er niet door be&iuml;nvloed." >
+<!ENTITY trWarning "Waarschuwing" >
+<!ENTITY trBugsAndLimitations "Fouten en beperkingen" >
+<!ENTITY trVersion "Versie" >
+<!ENTITY trDate "Datum" >
+<!ENTITY trReturns "Retourneert" >
+<!ENTITY trSeeAlso "Zie ook" >
+<!ENTITY trParameters "Parameters" >
+<!ENTITY trExceptions "Excepties" >
+<!ENTITY trGeneratedBy "Gegenereerd door" >
+<!ENTITY trNamespaceList "Namespace Lijst" >
+<!ENTITY trFriends "Friends" >
+<!ENTITY trRelatedFunctionDocumentation "Documentatie van friends en gerelateerde functies" >
+<!ENTITY trPublicMembers "Public Members" >
+<!ENTITY trPublicSlots "Public Slots" >
+<!ENTITY trSignals "Signals" >
+<!ENTITY trStaticPublicMembers "Static Public Members" >
+<!ENTITY trProtectedMembers "Protected Members" >
+<!ENTITY trProtectedSlots "Protected Slots" >
+<!ENTITY trStaticProtectedMembers "Static Protected Members" >
+<!ENTITY trPrivateMembers "Private Members" >
+<!ENTITY trPrivateSlots "Private Slots" >
+<!ENTITY trStaticPrivateMembers "Static Private Members" >
+<!ENTITY trNamespaceMembers "Namespace Members" >
+<!ENTITY trNamespaceIndex "Namespace Index" >
+<!ENTITY trNamespaceDocumentation "Namespace Documentatie" >
+<!ENTITY trNamespaces "Namespaces" >
+<!ENTITY trAlphabeticalList "Alphabetical List" >
+<!ENTITY trReturnValues "Retour waarden" >
+<!ENTITY trMainPage "Hoofd Pagina" >
+<!ENTITY trPageAbbreviation "p." >
+<!ENTITY trSources "Broncode" >
+<!ENTITY trDeprecated "Verouderd" >
+<!ENTITY trConstructorDocumentation "Constructor & Destructor Documentatie" >
+<!ENTITY trGotoSourceCode "Ga naar de bron code van deze file." >
+<!ENTITY trGotoDocumentation "Ga naar de documentatie van deze file." >
+<!ENTITY trPrecondition "Preconditie" >
+<!ENTITY trPostcondition "Postconditie" >
+<!ENTITY trInvariant "Invariant" >
+<!ENTITY trInitialValue "Initi&euml;le waarde:" >
+<!ENTITY trCode "code" >
+<!ENTITY trGraphicalHierarchy "Grafische Klasse Hi&euml;rarchie" >
+<!ENTITY trGotoGraphicalHierarchy "Ga naar de grafische klasse hi&euml;rarchie" >
+<!ENTITY trGotoTextualHierarchy "Ga naar de tekstuele klasse hi&euml;rarchie" >
+<!ENTITY trPageIndex "Pagina Index" >
+<!ENTITY trNote "Noot" >
+<!ENTITY trPublicTypes "Public Typen" >
+<!ENTITY trPublicAttribsC "Public Attributen" >
+<!ENTITY trPublicAttribs "Public Attributen" >
+<!ENTITY trStaticPublicAttribs "Static Public Attributen" >
+<!ENTITY trProtectedTypes "Protected Typen" >
+<!ENTITY trProtectedAttribs "Protected Attributen" >
+<!ENTITY trStaticProtectedAttribs "Static Protected Attributen" >
+<!ENTITY trPrivateTypes "Private Typen" >
+<!ENTITY trPrivateAttribs "Private Attributen" >
+<!ENTITY trStaticPrivateAttribs "Static Private Attributen" >
+<!ENTITY trTodo "Todo" >
+<!ENTITY trTodoList "Todo Lijst" >
+<!ENTITY trReferencedBy "Wordt aangeroepen door" >
+<!ENTITY trRemarks "Opmerkingen" >
+<!ENTITY trAttention "Attentie" >
+<!ENTITY trInclByDepGraph "Deze graaf geeft aan welke files direct of indirect afhankelijk zijn van deze file:" >
+<!ENTITY trSince "Sinds" >
+<!ENTITY trLegendTitle "Graaf Legenda" >
+<!ENTITY trLegendDocs <![CDATA[Deze pagina legt uit hoe de grafen die gegenereerd worden door doxygen ge&iuml;nterpreteerd dienen te worden.<p>
+Beschouw het volgende voorbeeld:
+\code
+/*! Onzichtbare klasse vanwege afkappen van de graaf */
+class Invisible { };
+
+/*! Afgekapte klasse, overervingsrelatie is verborgen */
+class Truncated : public Invisible { };
+
+/* Klasse is niet gedocumenteerd met doxygen commentaar */
+class Undocumented { };
+
+/*! Klasse met public inheritance */
+class PublicBase : public Truncated { };
+
+/*! Klasse met protected inheritance */
+class ProtectedBase { };
+
+/*! Klasse met private inheritance */
+class PrivateBase { };
+
+/*! Klasse die wordt gebruikt door de klasse Inherited */
+class Used { };
+
+/*! Super klasse die overerft van een aantal andere klassen */
+class Inherited : public PublicBase,
+                  protected ProtectedBase,
+                  private PrivateBase,
+                  public Undocumented
+{
+  private:
+    Used *m_usedClass;
+};
+\endcode
+Als de \c MAX_DOT_GRAPH_HEIGHT tag in the configuratie file op 200 gezet is, zal het bestaande voorbeeld resulteren in de volgende graaf:<p><center><img src="graph_legend.gif"></center>
+<p>
+De rechthoeken in the bovenstaande graaf hebben de volgende betekenis:
+<ul>
+<li>Een gevulde zwarte rechthoek representeert de structure of klasse waarvoor de graaf is gegeneerd.
+<li>Een rechthoek met een zwarte rand representeert een gedocumenteerde structure of klasse.
+<li>Een rechthoek met een grijze rand representeert een ongedocumenteerde structure of klasse.
+<li>Een rechthoek met een rode rand representeert een gedocumenteerde structure or klasse waarvoor
+niet alle overervings- of gebruiksrelaties konden worden getoond. Een graaf wordt afgekapt als hij niet past binnen de gespecificeerde grenzen.</ul>
+De pijlen hebben de volgende betekenis:
+<ul>
+<li>Een donkerblauwe pijl visualizeert een public inheritance relatie tussen twee klassen.
+<li>Een donkergroene pijl wordt gebruikt voor protected inheritance.
+<li>Een donkerrode pijl wordt gebruikt voor private inheritance.
+<li>Een paars gestreepte pijl wordt gebruikt indien een klasse bevat is of gebruikt wordt door een andere klasse. De pijl is gelabeled met de variable(n) die toegang geven tot de aangewezen klasse of structure. 
+</ul>
+]]> >
+<!ENTITY trLegend "legenda" >
+<!ENTITY trTest "Test" >
+<!ENTITY trTestList "Test Lijst" >
+<!ENTITY trDCOPMethods "DCOP Methoden" >
+<!ENTITY trProperties "Properties" >
+<!ENTITY trPropertyDocumentation "Property Documentatie" >
+<!ENTITY trInterfaces "Interfaces" >
+<!ENTITY trClassesC "Klassen" >
+<!ENTITY trClasses "Klassen" >
+<!ENTITY trPackageList "Package Lijst" >
+<!ENTITY trPackageListDescription "Hier volgen de packages, elk met een korte beschrijving (indien aanwezig):" >
+<!ENTITY trPackages "Packages" >
+<!ENTITY trPackageDocumentation "Package Documentatie" >
+<!ENTITY trDefineValue "Waarde:" >
+<!ENTITY trBug "Bug" >
+<!ENTITY trBugList "Bug Lijst" >
+<!ENTITY trRTFansicp "1252" >
+<!ENTITY trRTFCharSet "0" >
+<!ENTITY trRTFGeneralIndex "Index" >
+
+<!-- Sets of simple entities -->
+<!ENTITY trFileListDescriptionF "Hieronder volgt de lijst met alle gedocumenteerde files, elk met een korte beschrijving:" >
+<!ENTITY trFileListDescriptionT "Hieronder volgt de lijst met alle files, elk met een korte beschrijving:" >
+<!-- -->
+<!ENTITY trCompoundMembersDescriptionFC "Hieronder volgt de lijst met alle gedocumenteerde klasse members met links naar de klassen waartoe ze behoren:" >
+<!ENTITY trCompoundMembersDescriptionTC "Hieronder volgt de lijst met alle klasse members met links naar de klasse documentatie voor elke member:" >
+<!ENTITY trCompoundMembersDescriptionF "Hieronder volgt de lijst met alle gedocumenteerde klasse members met links naar de klassen waartoe ze behoren:" >
+<!ENTITY trCompoundMembersDescriptionT "Hieronder volgt de lijst met alle klasse members met links naar de klasse documentatie voor elke member:" >
+<!-- -->
+<!ENTITY trFileMembersDescriptionFC "Hieronder volgt de lijst met alle gedocumenteerde file members met links naar de files waartoe ze behoren:" >
+<!ENTITY trFileMembersDescriptionTC "Hieronder volgt de lijst met alle file members met links naar de file documentatie voor elke member:" >
+<!ENTITY trFileMembersDescriptionF "Hieronder volgt de lijst met alle gedocumenteerde file members met links naar de files waartoe ze behoren:" >
+<!ENTITY trFileMembersDescriptionT "Hieronder volgt de lijst met alle file members met links naar de file documentatie voor elke member:" >
+<!-- -->
+<!ENTITY trNamespaceListDescriptionF "Hier is een lijst met alle gedocumenteerde namespaces met voor elk een korte beschrijving:" >
+<!ENTITY trNamespaceListDescriptionT "Hier is een lijst met alle namespaces met voor elk een korte beschrijving:" >
+<!-- -->
+<!ENTITY trNamespaceMemberDescriptionF "Hier is een lijst van alle gedocumenteerde namespace members met links naar de namespaces waartoe ze behoren:" >
+<!ENTITY trNamespaceMemberDescriptionT "Hier is een lijst van alle namespace members met links naar de namespace documentatie voor iedere member:" >
+<!-- -->
+<!ENTITY trclass "klass" >
+<!ENTITY trclasses "klassn" >
+<!ENTITY trClass "Klasse" >
+<!ENTITY trClasses "Klassen" >
+<!-- -->
+<!ENTITY trfile "file" >
+<!ENTITY trfiles "files" >
+<!ENTITY trFile "File" >
+<!ENTITY trFiles "Files" >
+<!-- -->
+<!ENTITY trnamespace "namespace" >
+<!ENTITY trnamespaces "namespaces" >
+<!ENTITY trNamespace "Namespace" >
+<!ENTITY trNamespaces "Namespaces" >
+<!-- -->
+<!ENTITY trgroup "groep" >
+<!ENTITY trgroups "groepen" >
+<!ENTITY trGroup "Groep" >
+<!ENTITY trGroups "Groepen" >
+<!-- -->
+<!ENTITY trpage "pagina" >
+<!ENTITY trpages "paginas" >
+<!ENTITY trPage "Pagina" >
+<!ENTITY trPages "Paginas" >
+<!-- -->
+<!ENTITY trmember "member" >
+<!ENTITY trmembers "members" >
+<!ENTITY trMember "Member" >
+<!ENTITY trMembers "Members" >
+<!-- -->
+<!ENTITY trfield "veld" >
+<!ENTITY trfields "velden" >
+<!ENTITY trField "Veld" >
+<!ENTITY trFields "Velden" >
+<!-- -->
+<!ENTITY trglobal "globale member" >
+<!ENTITY trglobals "globale members" >
+<!ENTITY trGlobal "Globale member" >
+<!ENTITY trGlobals "Globale members" >
+<!-- -->
+<!ENTITY trauthor "auteur" >
+<!ENTITY trauthors "auteurs" >
+<!ENTITY trAuthor "Auteur" >
+<!ENTITY trAuthors "Auteurs" >
+<!-- -->
+<!ENTITY trClassDocGeneratedFromFile "De documentatie voor deze class is gegenereerd op grond van de volgende file:" >
+<!ENTITY trClassDocGeneratedFromFiles "De documentatie voor deze class is gegenereerd op grond van de volgende files:" >
+
+<!ENTITY trStructDocGeneratedFromFile "De documentatie voor deze struct is gegenereerd op grond van de volgende file:" >
+<!ENTITY trStructDocGeneratedFromFiles "De documentatie voor deze struct is gegenereerd op grond van de volgende files:" >
+
+<!ENTITY trUnionDocGeneratedFromFile "De documentatie voor deze union is gegenereerd op grond van de volgende file:" >
+<!ENTITY trUnionDocGeneratedFromFiles "De documentatie voor deze union is gegenereerd op grond van de volgende files:" >
+
+<!ENTITY trInterfaceDocGeneratedFromFile "De documentatie voor deze interface is gegenereerd op grond van de volgende file:" >
+<!ENTITY trInterfaceDocGeneratedFromFiles "De documentatie voor deze interface is gegenereerd op grond van de volgende files:" >
+
+<!ENTITY trExceptionDocGeneratedFromFile "De documentatie voor deze exception is gegenereerd op grond van de volgende file:" >
+<!ENTITY trExceptionDocGeneratedFromFiles "De documentatie voor deze exception is gegenereerd op grond van de volgende files:" >
+<!-- -->
+
+------------------------------------------
+
+
+<!-- Template entities (or what should be) -->
+
+<!ENTITY trDefinedAtLineInSourceFile "De definitie bevindt zich op regel @0 in de file @1." >
+<!ENTITY trDefinedInSourceFile "De definitie bevindt zich in de file @0." >
+<!ENTITY trFileReference "$1 File Referentie" >
+<!ENTITY trNamespaceReference "$1 Namespace Referentie" >
+<!ENTITY trCollaborationDiagram "Collaboratie diagram voor $1:" >
+<!ENTITY trInclDepGraph "Include afhankelijkheidsgraaf voor $1:" >
+<!ENTITY trPackage "Package $1" >
+
+<!-- Sets of template entities -->
+
+<!ENTITY trClassReference "$1  Class Referentie" >
+<!ENTITY trClassTemplateReference "$1  Template Class Referentie" >
+
+<!ENTITY trStructReference "$1  Struct Referentie" >
+<!ENTITY trUnionReference "$1  Union Referentie" >
+<!ENTITY trInterfaceReference "$1  Interface Referentie" >
+<!ENTITY trExceptionReference "$1  Exception Referentie" >
+
+<!-- Simple entities with fixed-name generated-entity references inside
+
+<!ENTITY trGeneratedAutomatically "Automatisch gegenereerd door Doxygen voor &ProjName; uit de programmacode." >
+<!ENTITY trGeneratedAt "Gegenereerd op &GenDate; voor &ProjName; door" >
+-->
+
+<!-- ... but they can be also implemented as template entities)-->
+
+<!ENTITY trGeneratedAutomatically "Automatisch gegenereerd door Doxygen voor $1 uit de programmacode." >
+<!ENTITY trGeneratedAt "Gegenereerd op $1 voor $2 door" >
+
+<!-- Simple fragments that should be converted to template entities -->
+
+<!ENTITY trThisIsTheListOfAllMembers "Dit is de complete lijst van alle members voor" >
+<!ENTITY trIncludingInheritedMembers ", inclusief alle overge&euml;rfde members." >
+
+<!-- should be converted to something like... -->
+
+<!ENTITY trThisIsTheListOfAllMembers "Dit is de complete lijst van alle members voor$1." >
+<!ENTITY trTheListOfAllMembersIncludingInherited "Dit is de complete lijst van alle members voor$1, inclusief alle overge&euml;rfde members." >
+
+<! --trWriteList() should be replaced using
+     &trLSep;, &trLSepAnd2;, and &trLSepAnd; entities
+
+<!ENTITY trWriteList1 "@0" >
+<!ENTITY trWriteList2 "@0 en @1" >
+<!ENTITY trWriteList3 "@0, @1 en @2" >
+-->
+
+<!ENTITY trLSep ", " >
+<!ENTITY trLSepAnd " en " >
+<!ENTITY trLSepAnd2 " en " >
+
+<!-- Should be normal entity templates instead using trWriteList inside -->
+
+<!--
+<!ENTITY trInheritsList "Erft over van @0." >
+<!ENTITY trInheritsList "Erft over van @0 en @1." >
+<!ENTITY trInheritsList "Erft over van @0, @1 en @2." >
+-->
+<!ENTITY trInherits "Erft over van $1." >
+<!ENTITY trInheritsList "Erft over van $1." >
+<!--
+<!ENTITY trInheritedByList "Wordt overge&euml;rfd door @0." >
+<!ENTITY trInheritedByList "Wordt overge&euml;rfd door @0 en @1." >
+<!ENTITY trInheritedByList "Wordt overge&euml;rfd door @0, @1 en @2." >
+-->
+<!ENTITY trInheritedBy "Wordt overge&euml;rfd door $1." >
+<!ENTITY trInheritedByList "Wordt overge&euml;rfd door $1." >
+<!--
+<!ENTITY trReimplementedFromList "Nieuwe implementatie van @0." >
+<!ENTITY trReimplementedFromList "Nieuwe implementatie van @0 en @1." >
+<!ENTITY trReimplementedFromList "Nieuwe implementatie van @0, @1 en @2." >
+-->
+<!ENTITY trReimplementedFrom "Nieuwe implementatie van $1." >
+<!ENTITY trReimplementedFromList "Nieuwe implementatie van $1." >
+<!--
+<!ENTITY trReimplementedInList "Opnieuw ge&iuml;mplementeerd in @0." >
+<!ENTITY trReimplementedInList "Opnieuw ge&iuml;mplementeerd in @0 en @1." >
+<!ENTITY trReimplementedInList "Opnieuw ge&iuml;mplementeerd in @0, @1 en @2." >
+-->
+<!ENTITY trReimplementedIn "Opnieuw ge&iuml;mplementeerd in $1." >
+<!ENTITY trReimplementedInList "Opnieuw ge&iuml;mplementeerd in $1." >
+
+<!-- (end) -->
