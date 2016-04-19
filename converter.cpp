@@ -20,10 +20,15 @@ using namespace std;
             "    </message>\n"; \
 }
 
-#define WRITE_ELEMENT_C(method)\
+#define WRITE_ELEMENT_WITH_C_OPTIMIZATION(method)\
 { \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "\">\n" \
+            "        <source>" << trEn.method() << "</source>\n" \
+            "        <translation>" << theTranslator->method() << "</translation>\n" \
+            "    </message>\n"; \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    fout << "    <message method=\"" #method "C\">\n" \
+    fout << "    <message method=\"" #method "-OptimizedForC\">\n" \
             "        <source>" << trEn.method() << "</source>\n" \
             "        <translation>" << theTranslator->method() << "</translation>\n" \
             "    </message>\n"; \
@@ -1163,8 +1168,7 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trMemberTypedefDocumentation);
     WRITE_ELEMENT(trMemberEnumerationDocumentation);
     WRITE_ELEMENT(trMemberFunctionDocumentation);
-    WRITE_ELEMENT(trMemberDataDocumentation);
-    WRITE_ELEMENT_C(trMemberDataDocumentation);                // C
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trMemberDataDocumentation);
     WRITE_ELEMENT(trMore);
     WRITE_ELEMENT(trListOfAllMembers);
     WRITE_ELEMENT(trMemberList);
@@ -1181,27 +1185,17 @@ void GenerateTranslatorSentences(const string & sLang)
 
     WRITE_ELEMENT(trModules);
     WRITE_ELEMENT(trClassHierarchy);
-
-    WRITE_ELEMENT(trCompoundList);
-    WRITE_ELEMENT_C(trCompoundList); // C
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trCompoundList);
     WRITE_ELEMENT(trFileList);
     //virtual QCString trHeaderFiles); // C
     WRITE_ELEMENT(trCompoundMembers);
-
-    WRITE_ELEMENT(trFileMembers);
-    WRITE_ELEMENT_C(trFileMembers); // C
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trFileMembers);
     WRITE_ELEMENT(trRelatedPages);
     WRITE_ELEMENT(trExamples);
     WRITE_ELEMENT(trSearch);
     WRITE_ELEMENT(trClassHierarchyDescription);
-
     WRITE_ELEMENT_EXTRACTALL(trFileListDescription);
-
-    WRITE_ELEMENT(trCompoundListDescription);
-    WRITE_ELEMENT_C(trCompoundListDescription); //C
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trCompoundListDescription);
     WRITE_ELEMENT_EXTRACTALL(trCompoundMembersDescription);
     WRITE_ELEMENT_EXTRACTALL_WITH_C_OPTIMIZATION(trFileMembersDescription);
 
@@ -1217,16 +1211,10 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trDocumentation);
     WRITE_ELEMENT(trModuleIndex);
     WRITE_ELEMENT(trHierarchicalIndex);
-
-	WRITE_ELEMENT(trCompoundIndex);
-	WRITE_ELEMENT_C(trCompoundIndex); // C
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trCompoundIndex);
 	WRITE_ELEMENT(trFileIndex);
     WRITE_ELEMENT(trModuleDocumentation);
-
-	WRITE_ELEMENT(trClassDocumentation);
-	WRITE_ELEMENT_C(trClassDocumentation); // C
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trClassDocumentation);
 	WRITE_ELEMENT(trFileDocumentation);
     WRITE_ELEMENT(trExampleDocumentation);
     WRITE_ELEMENT(trPageDocumentation);
@@ -1244,10 +1232,7 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trEnumerationTypeDocumentation);
     WRITE_ELEMENT(trFunctionDocumentation);
     WRITE_ELEMENT(trVariableDocumentation);
-
-	WRITE_ELEMENT(trCompounds);
-	WRITE_ELEMENT_C(trCompounds); // C
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trCompounds);
 	WRITE_ELEMENT2(trGeneratedAt, "%1", "%2");
 
     //virtual QCString trWrittenBy() = 0;
@@ -1373,10 +1358,7 @@ void GenerateTranslatorSentences(const string & sLang)
 
     WRITE_ELEMENT(trNote);
     WRITE_ELEMENT(trPublicTypes);
-
-	WRITE_ELEMENT(trPublicAttribs);
-	WRITE_ELEMENT_C(trPublicAttribs); // C
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trPublicAttribs);
 	WRITE_ELEMENT(trStaticPublicAttribs);
     WRITE_ELEMENT(trProtectedTypes);
     WRITE_ELEMENT(trProtectedAttribs);
@@ -1435,11 +1417,7 @@ void GenerateTranslatorSentences(const string & sLang)
     //////////////////////////////////////////////////////////////////////////
 
     //virtual QCString trInterfaces() = 0;
-
-	WRITE_ELEMENT(trClasses);
-	WRITE_ELEMENT_C(trClasses); // C
-
-
+    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trClasses);
     WRITE_ELEMENT1(trPackage, "%1");
     WRITE_ELEMENT(trPackageList);
     WRITE_ELEMENT(trPackageListDescription);
