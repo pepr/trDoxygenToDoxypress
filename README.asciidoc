@@ -1,6 +1,8 @@
 Translators from Doxygen to DoxyPress
 =====================================
 
+:cpp: C++
+
 Doxygen
 -------
 
@@ -16,8 +18,8 @@ DoxyPress
 
 http://www.copperspice.com/documentation-doxypress.html[DoxyPress] was initially
 a for of Doxygen. The main goals are to enhance the old functionality so, 
-that it will be able to document newer features of the C\++ language (C\++11,
-C\++14, and the future specifications). The goals and the process of rewriting
+that it will be able to document newer features of the {cpp} language ({cpp}11,
+{cpp}14, and the future specifications). The goals and the process of rewriting
 were presented at 
 https://youtu.be/hQphBQMwk7s[CppCon 2015: Barbara Geller & Ansel Sermersheim “Doxygen to DoxyPress...”].
 
