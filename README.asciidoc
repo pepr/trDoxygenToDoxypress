@@ -7,7 +7,7 @@ Doxygen
 -------
 
 http://www.doxygen.org/[Doxygen] tool uses the abstract class `Translator` to define
-API for the human-language dedicated classes, for example `TranslatorEnglish`. 
+API for the human-language dedicated classes, for example `TranslatorEnglish`.
 When a documentation is processed by Doxygen, the cofiguration `Doxyfile` says
 what human language should be used, and Doxygen instantiates the language
 specific `TranslatorXxxx` instance.
@@ -17,10 +17,10 @@ DoxyPress
 ---------
 
 http://www.copperspice.com/documentation-doxypress.html[DoxyPress] was initially
-a for of Doxygen. The main goals are to enhance the old functionality so, 
+a fork of Doxygen. The main goals are to enhance the old functionality so
 that it will be able to document newer features of the {cpp} language ({cpp}11,
 {cpp}14, and the future specifications). The goals and the process of rewriting
-were presented at 
+were presented at
 https://youtu.be/hQphBQMwk7s[CppCon 2015: Barbara Geller & Ansel Sermersheim “Doxygen to DoxyPress...”].
 
 
