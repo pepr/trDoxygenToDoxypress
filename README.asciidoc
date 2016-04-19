@@ -1,0 +1,39 @@
+Translators from Doxygen to DoxyPress
+=====================================
+
+Doxygen
+-------
+
+http://www.doxygen.org/[Doxygen] tool uses the abstract class `Translator` to define
+API for the human-language dedicated classes, for example `TranslatorEnglish`. 
+When a documentation is processed by Doxygen, the cofiguration `Doxyfile` says
+what human language should be used, and Doxygen instantiates the language
+specific `TranslatorXxxx` instance.
+
+
+DoxyPress
+---------
+
+http://www.copperspice.com/documentation-doxypress.html[DoxyPress] was initially
+a for of Doxygen. The main goals are to enhance the old functionality so, 
+that it will be able to document newer features of the C++ language (C++11,
+C++14, and the future specifications). The goals and the process of rewriting
+were presented at 
+https://youtu.be/hQphBQMwk7s[CppCon 2015: Barbara Geller & Ansel Sermersheim “Doxygen to DoxyPress...”].
+
+
+Translators Revisited (Doxygen)
+-------------------------------
+
+The Translators Revisited analysis was written in 2001 by Petr Přikryl.
+It identifies some problems in Doxygen with human-language translations.
+It proposes changes to the internal structure to separate the language
+dependent text from the code. Because of various reasons, it was not implemented.
+
+
+Converter
+---------
+
+This tool should help to extract language dependent sources from the Doxygen sources.
+The goal is to take advantage of the effort of the supported human languages, and
+to transfer the work of the language maintainers to the “Doxygen phoenix project”.
