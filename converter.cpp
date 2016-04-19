@@ -61,23 +61,19 @@ using namespace std;
 }
 
 
-#define WRITE_ELEMENT_FC(method)\
+#define WRITE_ELEMENT_EXTRACTALL_OPTIMIZED_FOR_C(method)\
 { \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    fout << "    <message method=\"" #method "FC\">\n" \
+    fout << "    <message method=\"" #method "-DontExtractAll-OptimizedForC\">\n" \
             "        <source>" << trEn.method(false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false) << "</translation>\n" \
             "    </message>\n"; \
-}
-
-#define WRITE_ELEMENT_TC(method)\
-{ \
-    Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    fout << "    <message method=\"" #method "TC\">\n" \
+    fout << "    <message method=\"" #method "-ExtractAll-OptimizedForC\">\n" \
             "        <source>" << trEn.method(true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true) << "</translation>\n" \
             "    </message>\n"; \
 }
+
 
 #define WRITE_ELEMENT1(method, arg)\
 { \
@@ -1193,18 +1189,13 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trClassHierarchyDescription);
 
     WRITE_ELEMENT_EXTRACTALL(trFileListDescription);
-    // WRITE_ELEMENT_T(trFileListDescription);
 
     WRITE_ELEMENT(trCompoundListDescription);
     WRITE_ELEMENT_C(trCompoundListDescription); //C
 
-    WRITE_ELEMENT_F(trCompoundMembersDescription);
-    WRITE_ELEMENT_T(trCompoundMembersDescription);
-
-    WRITE_ELEMENT_F(trFileMembersDescription);
-    WRITE_ELEMENT_T(trFileMembersDescription);
-    WRITE_ELEMENT_FC(trFileMembersDescription); // C
-    WRITE_ELEMENT_TC(trFileMembersDescription); // C
+    WRITE_ELEMENT_EXTRACTALL(trCompoundMembersDescription);
+    WRITE_ELEMENT_EXTRACTALL(trFileMembersDescription);
+    WRITE_ELEMENT_EXTRACTALL_OPTIMIZED_FOR_C(trFileMembersDescription); // C
 
     //virtual QCString trHeaderFilesDescription);
     WRITE_ELEMENT(trExamplesDescription);
@@ -1273,10 +1264,7 @@ void GenerateTranslatorSentences(const string & sLang)
     //////////////////////////////////////////////////////////////////////////
 
     WRITE_ELEMENT(trNamespaceList);
-	
-	WRITE_ELEMENT_F(trNamespaceListDescription);
-	WRITE_ELEMENT_T(trNamespaceListDescription);
-	
+	WRITE_ELEMENT_EXTRACTALL(trNamespaceListDescription);
 	WRITE_ELEMENT(trFriends);
 
     //////////////////////////////////////////////////////////////////////////
@@ -1311,10 +1299,7 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT1INT(trReimplementedFromList, 1);
     WRITE_ELEMENT1INT(trReimplementedInList, 1);
     WRITE_ELEMENT(trNamespaceMembers);
-
-	WRITE_ELEMENT_F(trNamespaceMemberDescription);
-	WRITE_ELEMENT_T(trNamespaceMemberDescription);
-
+	WRITE_ELEMENT_EXTRACTALL(trNamespaceMemberDescription);
 	WRITE_ELEMENT(trNamespaceIndex);
     WRITE_ELEMENT(trNamespaceDocumentation);
 
