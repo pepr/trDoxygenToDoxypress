@@ -47,6 +47,20 @@ using namespace std;
             "    </message>\n"; \
 }
 
+#define WRITE_ELEMENT_EXTRACTALL(method)\
+{ \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "-DontExtractAll\">\n" \
+            "        <source>" << trEn.method(false) << "</source>\n" \
+            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
+            "    </message>\n"; \
+    fout << "    <message method=\"" #method "-ExtractAll\">\n" \
+            "        <source>" << trEn.method(true) << "</source>\n" \
+            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
+            "    </message>\n"; \
+}
+
+
 #define WRITE_ELEMENT_FC(method)\
 { \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
@@ -1178,8 +1192,8 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trSearch);
     WRITE_ELEMENT(trClassHierarchyDescription);
 
-    WRITE_ELEMENT_F(trFileListDescription);
-    WRITE_ELEMENT_T(trFileListDescription);
+    WRITE_ELEMENT_EXTRACTALL(trFileListDescription);
+    // WRITE_ELEMENT_T(trFileListDescription);
 
     WRITE_ELEMENT(trCompoundListDescription);
     WRITE_ELEMENT_C(trCompoundListDescription); //C
