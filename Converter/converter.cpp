@@ -437,7 +437,6 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trClassHierarchy);
     WRITE_ELEMENT_WITH_C_OPTIMIZATION(trCompoundList);
     WRITE_ELEMENT(trFileList);
-    //virtual QCString trHeaderFiles); // C
     WRITE_ELEMENT(trCompoundMembers);
     WRITE_ELEMENT_WITH_C_OPTIMIZATION(trFileMembers);
     WRITE_ELEMENT(trRelatedPages);
@@ -449,11 +448,9 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT_EXTRACTALL(trCompoundMembersDescription);
     WRITE_ELEMENT_EXTRACTALL_WITH_C_OPTIMIZATION(trFileMembersDescription);
 
-    //virtual QCString trHeaderFilesDescription);
     WRITE_ELEMENT(trExamplesDescription);
     WRITE_ELEMENT(trRelatedPagesDescription);
     WRITE_ELEMENT(trModulesDescription);
-    //virtual QCString trNoDescriptionAvailable);
 
 
     // index titles (the project name is prepended for these)
@@ -470,29 +467,21 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trPageDocumentation);
     WRITE_ELEMENT(trReferenceManual);
     WRITE_ELEMENT(trDefines);
-    //virtual QCString trFuncProtos() = 0;
     WRITE_ELEMENT(trTypedefs);
     WRITE_ELEMENT(trEnumerations);
     WRITE_ELEMENT(trFunctions);
     WRITE_ELEMENT(trVariables);
     WRITE_ELEMENT(trEnumerationValues);
     WRITE_ELEMENT(trDefineDocumentation);
-    //virtual QCString trFunctionPrototypeDocumentation() = 0;
     WRITE_ELEMENT(trTypedefDocumentation);
     WRITE_ELEMENT(trEnumerationTypeDocumentation);
     WRITE_ELEMENT(trFunctionDocumentation);
     WRITE_ELEMENT(trVariableDocumentation);
     WRITE_ELEMENT_WITH_C_OPTIMIZATION(trCompounds);
 	WRITE_ELEMENT2(trGeneratedAt);
-
-    //virtual QCString trWrittenBy() = 0;
-
 	WRITE_ELEMENT1(trClassDiagram);
-
 	WRITE_ELEMENT(trForInternalUseOnly);
-    //virtual QCString trReimplementedForInternalReasons() = 0;
     WRITE_ELEMENT(trWarning);
-    //virtual QCString trBugsAndLimitations() = 0;
     WRITE_ELEMENT(trVersion);
     WRITE_ELEMENT(trDate);
     WRITE_ELEMENT(trReturns);
@@ -500,7 +489,6 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trParameters);
     WRITE_ELEMENT(trExceptions);
     WRITE_ELEMENT(trGeneratedBy);
-
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990307
@@ -555,7 +543,6 @@ void GenerateTranslatorSentences(const string & sLang)
     //////////////////////////////////////////////////////////////////////////
 
 	WRITE_ELEMENT_COMPOUNDTYPE_SINGULAR(trGeneratedFromFiles);
-	//virtual QCString trAlphabeticalList() = 0;
 
     //////////////////////////////////////////////////////////////////////////
     // new since 0.49-990901
@@ -569,15 +556,8 @@ void GenerateTranslatorSentences(const string & sLang)
     // new since 0.49-991003
     //////////////////////////////////////////////////////////////////////////
 
-    //virtual QCString trSources() = 0;
     WRITE_ELEMENT(trDefinedAtLineInSourceFile);
     WRITE_ELEMENT(trDefinedInSourceFile);
-
-	//////////////////////////////////////////////////////////////////////////
-    // new since 0.49-991205
-    //////////////////////////////////////////////////////////////////////////
-
-    WRITE_ELEMENT(trDeprecated);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.0.0
@@ -614,13 +594,6 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trPrivateAttribs);
     WRITE_ELEMENT(trStaticPrivateAttribs);
 
-    /////////////////////////////////////////////////////////////trClasses/////////////
-    // new since 1.1.3
-    //////////////////////////////////////////////////////////////////////////
-
-    WRITE_ELEMENT(trTodo);
-    WRITE_ELEMENT(trTodoList);
-
     //////////////////////////////////////////////////////////////////////////
     // new since 1.1.4
     //////////////////////////////////////////////////////////////////////////
@@ -639,19 +612,6 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trLegendDocs);
     WRITE_ELEMENT(trLegend);
 
-	//////////////////////////////////////////////////////////////////////////
-    // new since 1.2.0
-    //////////////////////////////////////////////////////////////////////////
-
-    WRITE_ELEMENT(trTest);
-    WRITE_ELEMENT(trTestList);
-
-    //////////////////////////////////////////////////////////////////////////
-    // new since 1.2.1
-    //////////////////////////////////////////////////////////////////////////
-
-    //virtual QCString trDCOPMethods() = 0;
-
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.2
     //////////////////////////////////////////////////////////////////////////
@@ -663,26 +623,16 @@ void GenerateTranslatorSentences(const string & sLang)
     // new since 1.2.4
     //////////////////////////////////////////////////////////////////////////
 
-    //virtual QCString trInterfaces() = 0;
     WRITE_ELEMENT_WITH_C_OPTIMIZATION(trClasses);
     WRITE_ELEMENT1(trPackage);
     WRITE_ELEMENT(trPackageList);
     WRITE_ELEMENT(trPackageListDescription);
     WRITE_ELEMENT(trPackages);
-    //virtual QCString trPackageDocumentation() = 0;
     WRITE_ELEMENT(trDefineValue);
-
-    //////////////////////////////////////////////////////////////////////////
-    // new since 1.2.5
-    //////////////////////////////////////////////////////////////////////////
-
-    WRITE_ELEMENT(trBug);
-    WRITE_ELEMENT(trBugList);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.6
     //////////////////////////////////////////////////////////////////////////
-
 
     /*! Used as ansicpg for RTF file
     *
@@ -750,7 +700,6 @@ void GenerateTranslatorSentences(const string & sLang)
 	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trGroup);
 	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trPage);
 	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trMember);
-    //virtual QCString trField(bool first_capital, bool singular) = 0;
 	WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(trGlobal);
 
     //////////////////////////////////////////////////////////////////////////
@@ -777,12 +726,6 @@ void GenerateTranslatorSentences(const string & sLang)
     //////////////////////////////////////////////////////////////////////////
 
     WRITE_ELEMENT(trRTFTableOfContents);
-
-    //////////////////////////////////////////////////////////////////////////
-    // new since 1.2.17
-    //////////////////////////////////////////////////////////////////////////
-
-    WRITE_ELEMENT(trDeprecatedList);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.2.18
@@ -812,7 +755,6 @@ void GenerateTranslatorSentences(const string & sLang)
     // new since 1.3.3
     //////////////////////////////////////////////////////////////////////////
 
-    //virtual QCString trSearchForIndex);
     WRITE_ELEMENT(trSearchResultsTitle);
     WRITE_ELEMENT1INT(trSearchResults);
     WRITE_ELEMENT(trSearchMatches);
@@ -888,7 +830,6 @@ void GenerateTranslatorSentences(const string & sLang)
     // new since 1.6.3
     //////////////////////////////////////////////////////////////////////////
 
-    //virtual QCString trDirDependency(const char *name) = 0;
     WRITE_ELEMENT1(trFileIn);
     WRITE_ELEMENT1(trIncludesFileIn);
     ///??? virtual QCString trDateTime(int year, int month, int day, int dayOfWeek,
