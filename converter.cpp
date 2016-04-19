@@ -47,6 +47,33 @@ using namespace std;
             "    </message>\n"; \
 }
 
+#define WRITE_ELEMENT_SINGULAR(method)\
+{ \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "-Plural\">\n" \
+            "        <source>" << trEn.method(false) << "</source>\n" \
+            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
+            "    </message>\n"; \
+    fout << "    <message method=\"" #method "-Singular\">\n" \
+            "        <source>" << trEn.method(true) << "</source>\n" \
+            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
+            "    </message>\n"; \
+}
+
+
+#define WRITE_ELEMENT_ENABLE(method)\
+{ \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "-Disabled\">\n" \
+            "        <source>" << trEn.method(false) << "</source>\n" \
+            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
+            "    </message>\n"; \
+    fout << "    <message method=\"" #method "-Enabled\">\n" \
+            "        <source>" << trEn.method(true) << "</source>\n" \
+            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
+            "    </message>\n"; \
+}
+
 
 #define WRITE_ELEMENT_EXTRACTALL_WITH_C_OPTIMIZATION(method)\
 { \
@@ -169,19 +196,19 @@ using namespace std;
 #define WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(method)\
 { \
     Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "-FirstCapitalSingular\">\n" \
+    fout << "    <message method=\"" #method "-FirstCapital-Singular\">\n" \
             "        <source>" << trEn.method(true, true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true, true) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-FirstCapitalPlural\">\n" \
+    fout << "    <message method=\"" #method "-FirstCapital-Plural\">\n" \
             "        <source>" << trEn.method(true, false) << "</source>\n" \
             "        <translation>" << theTranslator->method(true, false) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-FirstSmallSingular\">\n" \
+    fout << "    <message method=\"" #method "-FirstSmall-Singular\">\n" \
             "        <source>" << trEn.method(false, true) << "</source>\n" \
             "        <translation>" << theTranslator->method(false, true) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-FirstSmallPlural\">\n" \
+    fout << "    <message method=\"" #method "-FirstSmall-Plural\">\n" \
             "        <source>" << trEn.method(false, false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false, false) << "</translation>\n" \
             "    </message>\n"; \
@@ -1592,24 +1619,23 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trCopyright);
     WRITE_ELEMENT1(trDirDepGraph);
 
-#if 0
     //////////////////////////////////////////////////////////////////////////
     // new since 1.8.0
     //////////////////////////////////////////////////////////////////////////
 
     WRITE_ELEMENT(trDetailLevel);
     WRITE_ELEMENT(trTemplateParameters);
-    WRITE_ELEMENT(trAndMore(const QCString &number) = 0;
-    WRITE_ELEMENT(trEnumGeneratedFromFiles(bool single) = 0;
-    WRITE_ELEMENT(trEnumReference(const char *name) = 0;
-    WRITE_ELEMENT(trInheritedFrom(const char *members, const char *what) = 0;
+    WRITE_ELEMENT1(trAndMore);
+    WRITE_ELEMENT_SINGULAR(trEnumGeneratedFromFiles);
+    WRITE_ELEMENT1(trEnumReference);
+    WRITE_ELEMENT2(trInheritedFrom);
     WRITE_ELEMENT(trAdditionalInheritedMembers);
 
     //////////////////////////////////////////////////////////////////////////
     // new since 1.8.2
     //////////////////////////////////////////////////////////////////////////
 
-    WRITE_ELEMENT(trPanelSynchronisationTooltip(bool enable) = 0;
+    WRITE_ELEMENT_ENABLE(trPanelSynchronisationTooltip);
     WRITE_ELEMENT(trProvidedByCategory);
     WRITE_ELEMENT(trExtendsClass);
     WRITE_ELEMENT(trClassMethods);
@@ -1624,24 +1650,17 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT(trInterfaces);
     WRITE_ELEMENT(trServices);
     WRITE_ELEMENT(trConstantGroups);
-    WRITE_ELEMENT(trConstantGroupReference(const char *namespaceName) = 0;
-    WRITE_ELEMENT(trServiceReference(const char *sName) = 0;
-    WRITE_ELEMENT(trSingletonReference(const char *sName) = 0;
-    WRITE_ELEMENT(trServiceGeneratedFromFiles(bool single) = 0;
-    WRITE_ELEMENT(trSingletonGeneratedFromFiles(bool single) = 0;
+    WRITE_ELEMENT1(trConstantGroupReference);
+    WRITE_ELEMENT1(trServiceReference);
+    WRITE_ELEMENT1(trSingletonReference);
+    WRITE_ELEMENT_SINGULAR(trServiceGeneratedFromFiles);
+    WRITE_ELEMENT_SINGULAR(trSingletonGeneratedFromFiles);
 
-#endif
-
-    fout << "\n<!-- (end) -->\n";
-
+    //----------------------------------------------------------------------
     fout << "</context>\n";
-
-    // Close the output file.
-    //
     fout.close();
 
     std::cerr << "\n";
-
 }
 
 
