@@ -61,8 +61,17 @@ using namespace std;
 }
 
 
-#define WRITE_ELEMENT_EXTRACTALL_OPTIMIZED_FOR_C(method)\
+#define WRITE_ELEMENT_EXTRACTALL_WITH_C_OPTIMIZATION(method)\
 { \
+    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    fout << "    <message method=\"" #method "-DontExtractAll\">\n" \
+            "        <source>" << trEn.method(false) << "</source>\n" \
+            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
+            "    </message>\n"; \
+    fout << "    <message method=\"" #method "-ExtractAll\">\n" \
+            "        <source>" << trEn.method(true) << "</source>\n" \
+            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
+            "    </message>\n"; \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
     fout << "    <message method=\"" #method "-DontExtractAll-OptimizedForC\">\n" \
             "        <source>" << trEn.method(false) << "</source>\n" \
@@ -1194,8 +1203,7 @@ void GenerateTranslatorSentences(const string & sLang)
     WRITE_ELEMENT_C(trCompoundListDescription); //C
 
     WRITE_ELEMENT_EXTRACTALL(trCompoundMembersDescription);
-    WRITE_ELEMENT_EXTRACTALL(trFileMembersDescription);
-    WRITE_ELEMENT_EXTRACTALL_OPTIMIZED_FOR_C(trFileMembersDescription); // C
+    WRITE_ELEMENT_EXTRACTALL_WITH_C_OPTIMIZATION(trFileMembersDescription);
 
     //virtual QCString trHeaderFilesDescription);
     WRITE_ELEMENT(trExamplesDescription);
