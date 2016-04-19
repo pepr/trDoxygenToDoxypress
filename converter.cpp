@@ -34,24 +34,6 @@ using namespace std;
             "    </message>\n"; \
 }
 
-#define WRITE_ELEMENT_F(method)\
-{ \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "F\">\n" \
-            "        <source>" << trEn.method(false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
-            "    </message>\n"; \
-}
-
-#define WRITE_ELEMENT_T(method)\
-{ \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "T\">\n" \
-            "        <source>" << trEn.method(true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
-            "    </message>\n"; \
-}
-
 #define WRITE_ELEMENT_EXTRACTALL(method)\
 { \
     Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
