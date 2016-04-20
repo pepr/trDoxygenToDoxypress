@@ -921,7 +921,7 @@ int main()
     GenerateTranslatorSentences("russian", "ru", "ru_RU");
     GenerateTranslatorSentences("serbian", "sr", "sr_CS");
     GenerateTranslatorSentences("serbian-cyrillic", "sr_cyrillic", "sr_CS");
-    /// GenerateTranslatorSentences("slovak", "sk", "sk_SK");
+    GenerateTranslatorSentences("slovak", "sk", "sk_SK");
     GenerateTranslatorSentences("slovene", "sl", "sl_SI");
     GenerateTranslatorSentences("spanish", "es", "es_ES");
     GenerateTranslatorSentences("swedish", "sv", "sv_SE");

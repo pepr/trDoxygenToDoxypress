@@ -37,7 +37,7 @@
 #include "translator_no.h"
 #include "translator_br.h"
 #include "translator_dk.h"
-//#include "translator_sk.h"
+#include "translator_sk.h"
 #include "translator_ua.h"
 #include "translator_gr.h"
 #include "translator_sr.h"
@@ -94,7 +94,7 @@ bool setTranslator(const std::string & langName)
     else if (L_EQUAL("norwegian")) { theTranslator = new TranslatorNorwegian; }
     else if (L_EQUAL("brazilian")) { theTranslator = new TranslatorBrazilian; }
     else if (L_EQUAL("danish")) { theTranslator = new TranslatorDanish; }
-    //else if (L_EQUAL("slovak")) { theTranslator = new TranslatorSlovak; }
+    else if (L_EQUAL("slovak")) { theTranslator = new TranslatorSlovak; }
     else if (L_EQUAL("ukrainian")) { theTranslator = new TranslatorUkrainian; }
     else if (L_EQUAL("greek")) { theTranslator = new TranslatorGreek; }
     else if (L_EQUAL("serbian")) { theTranslator = new TranslatorSerbian; }

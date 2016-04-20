@@ -1817,7 +1817,7 @@ class TranslatorSlovak : public Translator
     virtual QCString trAndMore(const QCString &number)
     {
         QCString result("a " + number + " ďaľší");
-        if (atoi(number) >= 5)
+        if (atoi(number.c_str()) >= 5)
             result += "ch";
         return result + "...";
     }
