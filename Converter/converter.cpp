@@ -134,22 +134,24 @@ using namespace std;
 
 #define WRITE_ELEMENT1INT(method)\
 { \
-    Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method " 1</comment>\n" \
-            "        <source>" << trEn.method(1) << "</source>\n" \
-            "        <translation>" << theTranslator->method(1) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method " 2</comment>\n" \
-            "        <source>" << trEn.method(2) << "</source>\n" \
-            "        <translation>" << theTranslator->method(2) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method " 3</comment>\n" \
-            "        <source>" << trEn.method(3) << "</source>\n" \
-            "        <translation>" << theTranslator->method(3) << "</translation>\n" \
-            "    </message>\n"; \
+    Config_setBool(false);                                          \
+    for (int i = 1; i < 4; ++i)                                     \
+    {                                                               \
+        string en{ trEn.method(i) };                                \
+        string::size_type pos;                                      \
+        pos = en.find("@0");                                        \
+        if (pos != string::npos) { en.replace(pos, 2, "%1"); }      \
+                                                                    \
+        string tr{ theTranslator->method(i) };                      \
+        pos = tr.find("@0");                                        \
+        if (pos != string::npos) { tr.replace(pos, 2, "%1"); }      \
+                                                                    \
+        fout << "    <message>\n"                                   \
+            "        <comment>" #method " 1</comment>\n"            \
+            "        <source>" << en << "</source>\n"               \
+            "        <translation>" << tr << "</translation>\n"     \
+            "    </message>\n";                                     \
+    }                                                               \
 }
 
 #define WRITE_ELEMENT2(method)\
@@ -251,20 +253,20 @@ using namespace std;
 
 
 
-void GenerateTranslatorSentences(const string & lang_readable, const string& xx_XX = "")
+void GenerateTranslatorSentences(const std::string& lang_readable,
+                                 const std::string& fname_suffix,
+                                 const std::string& xx_XX = "")
 {
     cerr << "Generating sentence definitions for " << lang_readable << " ... ";
 
-    // Construct the File Name.
-    string fname{ "doxy_" + lang_readable + ".ts2" };
-
-    // Open the file for writing.
+    // Construct the File Name, and open the file for writing.
+    string fname{ "doxy_" + fname_suffix + ".ts2" };
     ofstream  fout(fname);
 
     // If the file could not be open, finish with error message.
     if (!fout.is_open())
     {
-        cerr << "Open for output to " << fname << " failed.\n";
+        cerr << "Open for output to '" << fname << "' failed.\n";
         exit(1);
     }
 
@@ -275,11 +277,12 @@ void GenerateTranslatorSentences(const string & lang_readable, const string& xx_
     if (theTranslator != nullptr)
         delete theTranslator;
 
-    // Set the language.
+    // Create the translator object for the language (and also the English one).
     setTranslator(lang_readable);
     TranslatorEnglish trEn;
 
     //------------------------------------------------------------------------------------
+    // The document heading.
     fout << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
             "<!DOCTYPE TS>\n"
             "<TS version=\"2.0\"";
@@ -287,77 +290,27 @@ void GenerateTranslatorSentences(const string & lang_readable, const string& xx_
     {
         fout << " language=\"" << xx_XX << "\"";
     }
-    fout << ">\n"
-            "<context>\n"
+    fout << ">\n";
+    
+    //------------------------------------------------------------------------------------
+    // The RTF context
+    fout << "<context>\n"
             "    <name>doxy-rtf</name>\n";
 
-    /*! Used as ansicpg for RTF file
-    *
-    * The following table shows the correlation of Charset name, Charset Value and
-    * <pre>
-    * Codepage number:
-    * Charset Name       Charset Value(hex)  Codepage number
-    * ------------------------------------------------------
-    * DEFAULT_CHARSET           1 (x01)
-    * SYMBOL_CHARSET            2 (x02)
-    * OEM_CHARSET             255 (xFF)
-    * ANSI_CHARSET              0 (x00)            1252
-    * RUSSIAN_CHARSET         204 (xCC)            1251
-    * EE_CHARSET              238 (xEE)            1250
-    * GREEK_CHARSET           161 (xA1)            1253
-    * TURKISH_CHARSET         162 (xA2)            1254
-    * BALTIC_CHARSET          186 (xBA)            1257
-    * HEBREW_CHARSET          177 (xB1)            1255
-    * ARABIC _CHARSET         178 (xB2)            1256
-    * SHIFTJIS_CHARSET        128 (x80)             932
-    * HANGEUL_CHARSET         129 (x81)             949
-    * GB2313_CHARSET          134 (x86)             936
-    * CHINESEBIG5_CHARSET     136 (x88)             950
-    * </pre>
-    *
-    */
-    WRITE_ELEMENT(trRTFansicp);
 
-    /*! Character sets
-    *  <pre>
-    *   0 — ANSI
-    *   1 — Default
-    *   2 — Symbol
-    *   3 — Invalid
-    *  77 — Mac
-    * 128 — Shift Jis
-    * 129 — Hangul
-    * 130 — Johab
-    * 134 — GB2312
-    * 136 — Big5
-    * 161 — Greek
-    * 162 — Turkish
-    * 163 — Vietnamese
-    * 177 — Hebrew
-    * 178 — Arabic
-    * 179 — Arabic Traditional
-    * 180 — Arabic user
-    * 181 — Hebrew user
-    * 186 — Baltic
-    * 204 — Russian
-    * 222 — Thai
-    * 238 — Eastern European
-    * 254 — PC 437
-    * 255 — OEM
-    * </pre>
-    */
+    WRITE_ELEMENT(trRTFansicp);
     WRITE_ELEMENT(trRTFCharSet);
 
     fout << "</context>\n";
 
     //------------------------------------------------------------------------------------
+    // The Text context.
     fout << "<context>\n"
             "    <name>doxy-text</name>\n";
 
-    //WRITE_ELEMENT(idLanguage);
-
+    // Some tricks from the older code (throw it away after clarification).
 #if 0
-
+    
     fout << "\n<! --trWriteList() should be replaced using\n"
         "     &trLSep;, &trLSepAnd2;, and &trLSepAnd; sentences\n\n";
 
@@ -932,11 +885,6 @@ void GenerateTranslatorSentences(const string & lang_readable, const string& xx_
 
 int main()
 {
-	GenerateTranslatorSentences("english", "en_EN");
-	GenerateTranslatorSentences("german", "de_DE");
-	GenerateTranslatorSentences("czech", "cs_CZ");
-	GenerateTranslatorSentences("dutch");
-
     /// GenerateTranslatorSentences("afrikaans");
     /// GenerateTranslatorSentences("arabic");
     /// GenerateTranslatorSentences("armenian");
@@ -945,14 +893,14 @@ int main()
     /// GenerateTranslatorSentences("chinese");
     /// GenerateTranslatorSentences("chinese-traditional");
     /// GenerateTranslatorSentences("croatian");
-    /// GenerateTranslatorSentences("czech");
+    GenerateTranslatorSentences("czech", "cz", "cs_CZ");
     /// GenerateTranslatorSentences("danish");
-    /// GenerateTranslatorSentences("dutch");
-    /// GenerateTranslatorSentences("english");
+    GenerateTranslatorSentences("dutch", "nl", "nl_NL");
+    GenerateTranslatorSentences("english", "en", "en_EN");
     /// GenerateTranslatorSentences("esperanto");
     /// GenerateTranslatorSentences("finnish");
     /// GenerateTranslatorSentences("french");
-    /// GenerateTranslatorSentences("german");
+    GenerateTranslatorSentences("german", "de", "de_DE");
     /// GenerateTranslatorSentences("greek");
     /// GenerateTranslatorSentences("hungarian");
     /// GenerateTranslatorSentences("indonesian");
