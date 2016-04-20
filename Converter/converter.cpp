@@ -13,8 +13,9 @@ using namespace std;
 
 #define WRITE_ELEMENT(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method "</comment>\n" \
             "        <source>" << trEn.method() << "</source>\n" \
             "        <translation>" << theTranslator->method() << "</translation>\n" \
             "    </message>\n"; \
@@ -22,13 +23,15 @@ using namespace std;
 
 #define WRITE_ELEMENT_WITH_C_OPTIMIZATION(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method "</comment>\n" \
             "        <source>" << trEn.method() << "</source>\n" \
             "        <translation>" << theTranslator->method() << "</translation>\n" \
             "    </message>\n"; \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    fout << "    <message method=\"" #method "-OptimizedForC\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " OPTIMIZE_OUTPUT_FOR_C</comment>\n" \
             "        <source>" << trEn.method() << "</source>\n" \
             "        <translation>" << theTranslator->method() << "</translation>\n" \
             "    </message>\n"; \
@@ -36,12 +39,14 @@ using namespace std;
 
 #define WRITE_ELEMENT_EXTRACTALL(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "-DontExtractAll\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method " DontExtractAll</comment>\n" \
             "        <source>" << trEn.method(false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-ExtractAll\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " ExtractAll</comment>\n" \
             "        <source>" << trEn.method(true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true) << "</translation>\n" \
             "    </message>\n"; \
@@ -49,12 +54,14 @@ using namespace std;
 
 #define WRITE_ELEMENT_SINGULAR(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "-Plural\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method " Plural</comment>\n" \
             "        <source>" << trEn.method(false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-Singular\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " Singular</comment>\n" \
             "        <source>" << trEn.method(true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true) << "</translation>\n" \
             "    </message>\n"; \
@@ -63,12 +70,14 @@ using namespace std;
 
 #define WRITE_ELEMENT_ENABLE(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "-Disabled\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method " Disabled</comment>\n" \
             "        <source>" << trEn.method(false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-Enabled\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " Enabled</comment>\n" \
             "        <source>" << trEn.method(true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true) << "</translation>\n" \
             "    </message>\n"; \
@@ -77,21 +86,25 @@ using namespace std;
 
 #define WRITE_ELEMENT_EXTRACTALL_WITH_C_OPTIMIZATION(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "-DontExtractAll\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method " DontExtractAll</comment>\n" \
             "        <source>" << trEn.method(false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-ExtractAll\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " ExtractAll</comment>\n" \
             "        <source>" << trEn.method(true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true) << "</translation>\n" \
             "    </message>\n"; \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    fout << "    <message method=\"" #method "-DontExtractAll-OptimizedForC\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " DontExtractAll OPTIMIZE_OUTPUT_FOR_C</comment>\n" \
             "        <source>" << trEn.method(false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-ExtractAll-OptimizedForC\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " ExtractAll OPTIMIZE_OUTPUT_FOR_C</comment>\n" \
             "        <source>" << trEn.method(true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true) << "</translation>\n" \
             "    </message>\n"; \
@@ -100,8 +113,9 @@ using namespace std;
 
 #define WRITE_ELEMENT1(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method "</comment>\n" \
             "        <source>" << trEn.method("%1") << "</source>\n" \
             "        <translation>" << theTranslator->method("%1") << "</translation>\n" \
             "    </message>\n"; \
@@ -110,8 +124,9 @@ using namespace std;
 #define WRITE_ELEMENT1REF(method)\
 { \
     QCString a{"%1"}; \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method "</comment>\n" \
             "        <source>" << trEn.method(a) << "</source>\n" \
             "        <translation>" << theTranslator->method(a) << "</translation>\n" \
             "    </message>\n"; \
@@ -119,16 +134,19 @@ using namespace std;
 
 #define WRITE_ELEMENT1INT(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "-1\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method " 1</comment>\n" \
             "        <source>" << trEn.method(1) << "</source>\n" \
             "        <translation>" << theTranslator->method(1) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-2\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " 2</comment>\n" \
             "        <source>" << trEn.method(2) << "</source>\n" \
             "        <translation>" << theTranslator->method(2) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-3\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method " 3</comment>\n" \
             "        <source>" << trEn.method(3) << "</source>\n" \
             "        <translation>" << theTranslator->method(3) << "</translation>\n" \
             "    </message>\n"; \
@@ -136,8 +154,9 @@ using namespace std;
 
 #define WRITE_ELEMENT2(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method "</comment>\n" \
             "        <source>" << trEn.method("%1", "%2") << "</source>\n" \
             "        <translation>" << theTranslator->method("%1", "%2") << "</translation>\n" \
             "    </message>\n"; \
@@ -145,7 +164,7 @@ using namespace std;
 
 #define WRITE_ELEMENT_COMPOUNDTYPE_SINGULAR(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    Config_setBool(false); \
     std::string result{ "Undefined" }; \
     for (auto compType: list<ClassDef::CompoundType>{ ClassDef::Class, ClassDef::Struct, ClassDef::Union, ClassDef::Interface, \
 	                      ClassDef::Protocol, ClassDef::Category, ClassDef::Exception }) { \
@@ -160,11 +179,13 @@ using namespace std;
 		case ClassDef::Exception:  result = "Exception"; break;	\
 		default: break;											\
 		}														\
-        fout << "    <message method=\"" #method << result << "-Plural\">\n" \
+        fout << "    <message>\n" \
+                "        <comment>" #method " Plural</comment>\n" \
                 "        <source>" << trEn.method(compType, false) << "</source>\n" \
                 "        <translation>" << theTranslator->method(compType, false) << "</translation>\n" \
                 "    </message>\n"; \
-        fout << "    <message method=\"" #method << result << "-Singular\">\n" \
+        fout << "    <message>\n" \
+                "        <comment>" #method " Singular</comment>\n" \
                 "        <source>" << trEn.method(compType, true) << "</source>\n" \
                 "        <translation>" << theTranslator->method(compType, true) << "</translation>\n" \
                 "    </message>\n"; \
@@ -174,7 +195,7 @@ using namespace std;
 
 #define WRITE_ELEMENT_NAME_COMPOUNDTYPE_TEMPLATE(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
+    Config_setBool(false); \
     std::string result{ "Undefined" }; \
     for (auto compType: list<ClassDef::CompoundType>{ ClassDef::Class, ClassDef::Struct, ClassDef::Union, ClassDef::Interface, \
 	                      ClassDef::Protocol, ClassDef::Category, ClassDef::Exception }) { \
@@ -189,11 +210,13 @@ using namespace std;
 		case ClassDef::Exception:  result = "Exception"; break;	\
 		default: break;											\
 		}														\
-        fout << "    <message method=\"" #method << result << "-NotTemplate\">\n" \
+        fout << "    <message>\n" \
+                "        <comment>" #method << result << " NotTemplate</comment>\n" \
                 "        <source>" << trEn.method("%1", compType, false) << "</source>\n" \
                 "        <translation>" << theTranslator->method("%1", compType, false) << "</translation>\n" \
                 "    </message>\n"; \
-        fout << "    <message method=\"" #method << result << "-IsTemplate\">\n" \
+        fout << "    <message>\n" \
+                "        <comment>" #method << result << " IsTemplate</comment>\n" \
                 "        <source>" << trEn.method("%1", compType, true) << "</source>\n" \
                 "        <translation>" << theTranslator->method("%1", compType, true) << "</translation>\n" \
                 "    </message>\n"; \
@@ -203,20 +226,24 @@ using namespace std;
 
 #define WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(method)\
 { \
-    Config_setBool(false); /* emulate OPTIMIZE_OUTPUT_FOR_C is False */ \
-    fout << "    <message method=\"" #method "-FirstCapital-Singular\">\n" \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method << " FirstCapital Singular</comment>\n" \
             "        <source>" << trEn.method(true, true) << "</source>\n" \
             "        <translation>" << theTranslator->method(true, true) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-FirstCapital-Plural\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method << " FirstCapital Plural</comment>\n" \
             "        <source>" << trEn.method(true, false) << "</source>\n" \
             "        <translation>" << theTranslator->method(true, false) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-FirstSmall-Singular\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method << " FirstSmall Singular</comment>\n" \
             "        <source>" << trEn.method(false, true) << "</source>\n" \
             "        <translation>" << theTranslator->method(false, true) << "</translation>\n" \
             "    </message>\n"; \
-    fout << "    <message method=\"" #method "-FirstSmall-Plural\">\n" \
+    fout << "    <message>\n" \
+            "        <comment>" #method << " FirstSmall Plural</comment>\n" \
             "        <source>" << trEn.method(false, false) << "</source>\n" \
             "        <translation>" << theTranslator->method(false, false) << "</translation>\n" \
             "    </message>\n"; \
@@ -253,7 +280,73 @@ void GenerateTranslatorSentences(const string & sLang)
     TranslatorEnglish trEn;
 
     //------------------------------------------------------------------------------------
-    fout << "Language id: " << sLang << "\n";
+    fout << R"(<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
+<context>
+    <name>doxy-rtf</name>
+)";
+
+    /*! Used as ansicpg for RTF file
+    *
+    * The following table shows the correlation of Charset name, Charset Value and
+    * <pre>
+    * Codepage number:
+    * Charset Name       Charset Value(hex)  Codepage number
+    * ------------------------------------------------------
+    * DEFAULT_CHARSET           1 (x01)
+    * SYMBOL_CHARSET            2 (x02)
+    * OEM_CHARSET             255 (xFF)
+    * ANSI_CHARSET              0 (x00)            1252
+    * RUSSIAN_CHARSET         204 (xCC)            1251
+    * EE_CHARSET              238 (xEE)            1250
+    * GREEK_CHARSET           161 (xA1)            1253
+    * TURKISH_CHARSET         162 (xA2)            1254
+    * BALTIC_CHARSET          186 (xBA)            1257
+    * HEBREW_CHARSET          177 (xB1)            1255
+    * ARABIC _CHARSET         178 (xB2)            1256
+    * SHIFTJIS_CHARSET        128 (x80)             932
+    * HANGEUL_CHARSET         129 (x81)             949
+    * GB2313_CHARSET          134 (x86)             936
+    * CHINESEBIG5_CHARSET     136 (x88)             950
+    * </pre>
+    *
+    */
+    WRITE_ELEMENT(trRTFansicp);
+
+    /*! Character sets
+    *  <pre>
+    *   0 — ANSI
+    *   1 — Default
+    *   2 — Symbol
+    *   3 — Invalid
+    *  77 — Mac
+    * 128 — Shift Jis
+    * 129 — Hangul
+    * 130 — Johab
+    * 134 — GB2312
+    * 136 — Big5
+    * 161 — Greek
+    * 162 — Turkish
+    * 163 — Vietnamese
+    * 177 — Hebrew
+    * 178 — Arabic
+    * 179 — Arabic Traditional
+    * 180 — Arabic user
+    * 181 — Hebrew user
+    * 186 — Baltic
+    * 204 — Russian
+    * 222 — Thai
+    * 238 — Eastern European
+    * 254 — PC 437
+    * 255 — OEM
+    * </pre>
+    */
+    WRITE_ELEMENT(trRTFCharSet);
+
+    fout << "</context>\n";
+
+    //------------------------------------------------------------------------------------
     fout << "<context>\n"
             "    <name>doxy-text</name>\n";
 
@@ -634,62 +727,6 @@ void GenerateTranslatorSentences(const string & sLang)
     // new since 1.2.6
     //////////////////////////////////////////////////////////////////////////
 
-    /*! Used as ansicpg for RTF file
-    *
-    * The following table shows the correlation of Charset name, Charset Value and
-    * <pre>
-    * Codepage number:
-    * Charset Name       Charset Value(hex)  Codepage number
-    * ------------------------------------------------------
-    * DEFAULT_CHARSET           1 (x01)
-    * SYMBOL_CHARSET            2 (x02)
-    * OEM_CHARSET             255 (xFF)
-    * ANSI_CHARSET              0 (x00)            1252
-    * RUSSIAN_CHARSET         204 (xCC)            1251
-    * EE_CHARSET              238 (xEE)            1250
-    * GREEK_CHARSET           161 (xA1)            1253
-    * TURKISH_CHARSET         162 (xA2)            1254
-    * BALTIC_CHARSET          186 (xBA)            1257
-    * HEBREW_CHARSET          177 (xB1)            1255
-    * ARABIC _CHARSET         178 (xB2)            1256
-    * SHIFTJIS_CHARSET        128 (x80)             932
-    * HANGEUL_CHARSET         129 (x81)             949
-    * GB2313_CHARSET          134 (x86)             936
-    * CHINESEBIG5_CHARSET     136 (x88)             950
-    * </pre>
-    *
-    */
-    WRITE_ELEMENT(trRTFansicp);
-
-    /*! Character sets
-    *  <pre>
-    *   0 — ANSI
-    *   1 — Default
-    *   2 — Symbol
-    *   3 — Invalid
-    *  77 — Mac
-    * 128 — Shift Jis
-    * 129 — Hangul
-    * 130 — Johab
-    * 134 — GB2312
-    * 136 — Big5
-    * 161 — Greek
-    * 162 — Turkish
-    * 163 — Vietnamese
-    * 177 — Hebrew
-    * 178 — Arabic
-    * 179 — Arabic Traditional
-    * 180 — Arabic user
-    * 181 — Hebrew user
-    * 186 — Baltic
-    * 204 — Russian
-    * 222 — Thai
-    * 238 — Eastern European
-    * 254 — PC 437
-    * 255 — OEM
-    * </pre>
-    */
-    WRITE_ELEMENT(trRTFCharSet);
     WRITE_ELEMENT(trRTFGeneralIndex);
 
     // Translation of the word
