@@ -18,7 +18,7 @@
 #include "translator_fr.h"
 #include "translator_id.h"
 #include "translator_it.h"
-//#include "translator_jp.h"
+#include "translator_jp.h"
 #include "translator_je.h"
 #include "translator_es.h"
 #include "translator_eo.h"
@@ -76,7 +76,7 @@ bool setTranslator(const std::string & langName)
     else if (L_EQUAL("french")) { theTranslator = new TranslatorFrench; }
     else if (L_EQUAL("indonesian")) { theTranslator = new TranslatorIndonesian; }
     else if (L_EQUAL("italian")) { theTranslator = new TranslatorItalian; }
-    //else if (L_EQUAL("japanese")) { theTranslator = new TranslatorJapanese; }
+    else if (L_EQUAL("japanese")) { theTranslator = new TranslatorJapanese; }
     else if (L_EQUAL("japanese-en")) { theTranslator = new TranslatorJapaneseEn; }
     else if (L_EQUAL("spanish")) { theTranslator = new TranslatorSpanish; }
     else if (L_EQUAL("finnish")) { theTranslator = new TranslatorFinnish; }

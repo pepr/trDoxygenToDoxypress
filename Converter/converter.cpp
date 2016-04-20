@@ -37,6 +37,22 @@ using namespace std;
             "    </message>\n"; \
 }
 
+#define WRITE_ELEMENT_WITH_JAVA_OPTIMIZATION(method)\
+{ \
+    Config_setBool(false); \
+    fout << "    <message>\n" \
+            "        <comment>" #method "</comment>\n" \
+            "        <source>" << trEn.method() << "</source>\n" \
+            "        <translation>" << theTranslator->method() << "</translation>\n" \
+            "    </message>\n"; \
+    Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_JAVA is True */ \
+    fout << "    <message>\n" \
+            "        <comment>" #method " OPTIMIZE_OUTPUT_JAVA</comment>\n" \
+            "        <source>" << trEn.method() << "</source>\n" \
+            "        <translation>" << theTranslator->method() << "</translation>\n" \
+            "    </message>\n"; \
+}
+
 #define WRITE_ELEMENT_EXTRACTALL(method)\
 { \
     Config_setBool(false); \
@@ -469,8 +485,18 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
     WRITE_ELEMENT(trDetailedDescription);
     WRITE_ELEMENT(trMemberTypedefDocumentation);
     WRITE_ELEMENT(trMemberEnumerationDocumentation);
-    WRITE_ELEMENT(trMemberFunctionDocumentation);
-    WRITE_ELEMENT_WITH_C_OPTIMIZATION(trMemberDataDocumentation);
+
+	// Only the Japanese translato uses OPTIMIZE_OUTPUT_JAVA and only on a single place.
+	if (lang_readable == "japanese")
+	{
+		WRITE_ELEMENT_WITH_JAVA_OPTIMIZATION(trMemberFunctionDocumentation);
+	}
+	else
+	{
+		WRITE_ELEMENT(trMemberFunctionDocumentation);
+	}
+
+	WRITE_ELEMENT_WITH_C_OPTIMIZATION(trMemberDataDocumentation);
     WRITE_ELEMENT(trMore);
     WRITE_ELEMENT(trListOfAllMembers);
     WRITE_ELEMENT(trMemberList);
@@ -906,7 +932,7 @@ int main()
     GenerateTranslatorSentences("hungarian", "hu", "hu_HU");
     GenerateTranslatorSentences("indonesian", "id", "id_ID");
     GenerateTranslatorSentences("italian", "it", "it_IT");
-    /// GenerateTranslatorSentences("japanese", "ja", "ja_JP");
+    GenerateTranslatorSentences("japanese", "ja", "ja_JP");
     GenerateTranslatorSentences("japanese-en", "ja_en", "ja_JP");
     GenerateTranslatorSentences("korean", "ko", "ko_KR");
     GenerateTranslatorSentences("korean-en", "ko_en", "ko_KR");
