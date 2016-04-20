@@ -62,5 +62,113 @@
     <ClInclude Include="translator_za.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="translator_br.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_ca.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_cn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_dk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_eo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_es.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_fa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_fi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_fr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_gr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_hr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_hu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_id.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_it.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_je.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_jp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_ke.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_kr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_lt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_lv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_mk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_nl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_no.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_pl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_pt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_ro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_ru.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_sc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_si.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_sk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_sr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_sv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_tr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_tw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_ua.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_vi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
