@@ -147,7 +147,7 @@ using namespace std;
         if (pos != string::npos) { tr.replace(pos, 2, "%1"); }      \
                                                                     \
         fout << "    <message>\n"                                   \
-            "        <comment>" #method " 1</comment>\n"            \
+            "        <comment>" #method << " " << i << "</comment>\n" \
             "        <source>" << en << "</source>\n"               \
             "        <translation>" << tr << "</translation>\n"     \
             "    </message>\n";                                     \
@@ -272,13 +272,14 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
 
     // File was open for writing. Generate the output.
     //
-    // If the translator object exists, delete it. New one will
-    // be created immediately.
-    if (theTranslator != nullptr)
-        delete theTranslator;
-
     // Create the translator object for the language (and also the English one).
     setTranslator(lang_readable);
+    if (theTranslator == nullptr)
+    {
+        cerr << "ERROR\n    The translator for '" << lang_readable << "' could not be instantiated (skipped).\n";
+        return;
+    }
+
     TranslatorEnglish trEn;
 
     //------------------------------------------------------------------------------------
@@ -885,9 +886,9 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
 
 int main()
 {
-    /// GenerateTranslatorSentences("afrikaans");
-    /// GenerateTranslatorSentences("arabic");
-    /// GenerateTranslatorSentences("armenian");
+    GenerateTranslatorSentences("afrikaans", "af", "af_ZA");
+    GenerateTranslatorSentences("arabic", "ar", "ar_SA");
+    GenerateTranslatorSentences("armenian", "am", "am_ET");
     /// GenerateTranslatorSentences("brazilian");
     /// GenerateTranslatorSentences("catalan");
     /// GenerateTranslatorSentences("chinese");
