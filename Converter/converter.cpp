@@ -889,23 +889,23 @@ int main()
     GenerateTranslatorSentences("afrikaans", "af", "af_ZA");
     GenerateTranslatorSentences("arabic", "ar", "ar_SA");
     GenerateTranslatorSentences("armenian", "am", "am_ET");
-    /// GenerateTranslatorSentences("brazilian");
-    /// GenerateTranslatorSentences("catalan");
-    /// GenerateTranslatorSentences("chinese");
-    /// GenerateTranslatorSentences("chinese-traditional");
-    /// GenerateTranslatorSentences("croatian");
+    GenerateTranslatorSentences("brazilian", "pt_BR", "pt_BR");
+    GenerateTranslatorSentences("catalan", "ca", "ca_ES");
+    GenerateTranslatorSentences("chinese", "zh", "zh_CN");
+    GenerateTranslatorSentences("chinese-traditional", "zh_TW", "zh_TW");
+    GenerateTranslatorSentences("croatian", "hr", "hr_HR");
     GenerateTranslatorSentences("czech", "cz", "cs_CZ");
-    /// GenerateTranslatorSentences("danish");
+    GenerateTranslatorSentences("danish", "da", "da_DK");
     GenerateTranslatorSentences("dutch", "nl", "nl_NL");
     GenerateTranslatorSentences("english", "en", "en_EN");
-    /// GenerateTranslatorSentences("esperanto");
-    /// GenerateTranslatorSentences("finnish");
-    /// GenerateTranslatorSentences("french");
+    GenerateTranslatorSentences("esperanto", "es", "es_ES");
+    GenerateTranslatorSentences("finnish", "fi", "fi_FI");
+    GenerateTranslatorSentences("french", "fr", "fr_FR");
     GenerateTranslatorSentences("german", "de", "de_DE");
-    /// GenerateTranslatorSentences("greek");
-    /// GenerateTranslatorSentences("hungarian");
-    /// GenerateTranslatorSentences("indonesian");
-    /// GenerateTranslatorSentences("italian");
+    GenerateTranslatorSentences("greek", "el", "el_GR");
+    GenerateTranslatorSentences("hungarian", "hu", "hu_HU");
+    GenerateTranslatorSentences("indonesian", "id", "id_ID");
+    GenerateTranslatorSentences("italian", "it", "it_IT");
     /// GenerateTranslatorSentences("japanese");
     /// GenerateTranslatorSentences("japanese-en");
     /// GenerateTranslatorSentences("korean");
@@ -928,7 +928,6 @@ int main()
     /// GenerateTranslatorSentences("turkish");
     /// GenerateTranslatorSentences("ukrainian");
     /// GenerateTranslatorSentences("vietnamese");
-
 
 	return 0;
 }
