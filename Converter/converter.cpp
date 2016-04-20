@@ -251,18 +251,18 @@ using namespace std;
 
 
 
-void GenerateTranslatorSentences(const string & sLang)
+void GenerateTranslatorSentences(const string & lang_readable, const string& xx_XX = "")
 {
-    cerr << "Generating sentence definitions for " << sLang << " ... ";
+    cerr << "Generating sentence definitions for " << lang_readable << " ... ";
 
     // Construct the File Name.
-    string fname{ "doxy_" + sLang + ".ts2" };
+    string fname{ "doxy_" + lang_readable + ".ts2" };
 
     // Open the file for writing.
     ofstream  fout(fname);
 
     // If the file could not be open, finish with error message.
-    if (! fout.is_open())
+    if (!fout.is_open())
     {
         cerr << "Open for output to " << fname << " failed.\n";
         exit(1);
@@ -276,16 +276,20 @@ void GenerateTranslatorSentences(const string & sLang)
         delete theTranslator;
 
     // Set the language.
-    setTranslator(sLang);
+    setTranslator(lang_readable);
     TranslatorEnglish trEn;
 
     //------------------------------------------------------------------------------------
-    fout << R"(<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
-<context>
-    <name>doxy-rtf</name>
-)";
+    fout << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+            "<!DOCTYPE TS>\n"
+            "<TS version=\"2.0\"";
+    if (!xx_XX.empty())
+    {
+        fout << " language=\"" << xx_XX << "\"";
+    }
+    fout << ">\n"
+            "<context>\n"
+            "    <name>doxy-rtf</name>\n";
 
     /*! Used as ansicpg for RTF file
     *
@@ -928,9 +932,9 @@ void GenerateTranslatorSentences(const string & sLang)
 
 int main()
 {
-	GenerateTranslatorSentences("english");
-	GenerateTranslatorSentences("german");
-	GenerateTranslatorSentences("czech");
+	GenerateTranslatorSentences("english", "en_EN");
+	GenerateTranslatorSentences("german", "de_DE");
+	GenerateTranslatorSentences("czech", "cs_CZ");
 	GenerateTranslatorSentences("dutch");
 
     /// GenerateTranslatorSentences("afrikaans");
