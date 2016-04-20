@@ -53,5 +53,14 @@
     <ClInclude Include="qcstring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="translator_am.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_ar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator_za.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

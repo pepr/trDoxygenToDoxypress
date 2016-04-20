@@ -119,9 +119,12 @@
     <ClInclude Include="qcstring.h" />
     <ClInclude Include="translator.h" />
     <ClInclude Include="translator_adapter.h" />
+    <ClInclude Include="translator_am.h" />
+    <ClInclude Include="translator_ar.h" />
     <ClInclude Include="translator_cz.h" />
     <ClInclude Include="translator_de.h" />
     <ClInclude Include="translator_en.h" />
+    <ClInclude Include="translator_za.h" />
     <ClInclude Include="xxx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
