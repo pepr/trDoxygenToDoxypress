@@ -11,6 +11,8 @@ std::string getDotImageExtension();
 //      Config_getBool(OPTIMIZE_OUTPUT_FOR_C)
 
 #define OPTIMIZE_OUTPUT_FOR_C "whatever string for the stub"
+#define OPTIMIZE_OUTPUT_JAVA "whatever string for the stub"
+
 bool Config_getBool(const std::string & s);
 void Config_setBool(bool bValue);
 
