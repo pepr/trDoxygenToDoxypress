@@ -36,17 +36,13 @@ using namespace std;
 #define WRITE_ELEMENT_WITH_C_OPTIMIZATION(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method "</comment>\n" \
-            "        <source>" << trEn.method() << "</source>\n" \
-            "        <translation>" << theTranslator->method() << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method() };             \
+    string tr{ theTranslator->method() };   \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr); \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    fout << "    <message>\n" \
-            "        <comment>" #method " OPTIMIZE_OUTPUT_FOR_C</comment>\n" \
-            "        <source>" << trEn.method() << "</source>\n" \
-            "        <translation>" << theTranslator->method() << "</translation>\n" \
-            "    </message>\n"; \
+    en = trEn.method();                     \
+    tr = theTranslator->method();           \
+    WRITE_MESSAGE_ELEMENT(#method " OPTIMIZE_OUTPUT_FOR_C", en, tr); \
 }
 
 #define WRITE_ELEMENT_WITH_JAVA_OPTIMIZATION(method)\
