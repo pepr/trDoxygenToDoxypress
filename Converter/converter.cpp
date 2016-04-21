@@ -129,25 +129,43 @@ using namespace std;
     WRITE_MESSAGE_ELEMENT(#method, en, tr);  \
 }
 
+// The following macro produces result for the Doxygen method that took
+// a number as the argument, and generated the template string with @0, @1, etc.
+// placeholders for the list items. The code of the method should be changed
+// to the code that returns a single %1 placeholder for the entire list.
+// The string representation of the list should be constructed separately
+// using the trLSep, trLSepAnd2, and trLSepAnd language-dependent separator.
+// This macro generates the new templates for a singular or plural (based
+// on the number of elements).
 #define WRITE_ELEMENT1INT(method)\
 { \
     Config_setBool(false);                                          \
-    ostringstream oss;                                              \
-    for (int i = 1; i < 4; ++i)                                     \
+    string en{ trEn.method(1) };    /* single element */            \
+    string::size_type pos;                                          \
+    pos = en.find("@0");                                            \
+    if (pos != string::npos) { en.replace(pos, 2, "%1"); }          \
+                                                                    \
+    string tr{ theTranslator->method(1) };                          \
+    pos = tr.find("@0");                                            \
+    if (pos != string::npos) { tr.replace(pos, 2, "%1"); }          \
+    WRITE_MESSAGE_ELEMENT(#method " Singular", en, tr);             \
+                                                                    \
+    en = trEn.method(5);    /* phrase for 5 elements */             \
+    pos = en.find("@0");                                            \
+    string::size_type pos2;                                         \
+    pos2 = en.find("@4");                                           \
+    if (pos2 != string::npos)                                       \
     {                                                               \
-        string en{ trEn.method(i) };                                \
-        string::size_type pos;                                      \
-        pos = en.find("@0");                                        \
-        if (pos != string::npos) { en.replace(pos, 2, "%1"); }      \
-                                                                    \
-        string tr{ theTranslator->method(i) };                      \
-        pos = tr.find("@0");                                        \
-        if (pos != string::npos) { tr.replace(pos, 2, "%1"); }      \
-                                                                    \
-        oss.str("");                                                \
-        oss << #method " " << i;                                    \
-        WRITE_MESSAGE_ELEMENT(oss.str(), en, tr);                   \
+        en.replace(en.begin() + pos, en.begin() + pos2 + 2, "%1");  \
     }                                                               \
+    tr = theTranslator->method(5);                                  \
+    pos = tr.find("@0");                                            \
+    pos2 = tr.find("@4");                                           \
+    if (pos2 != string::npos)                                       \
+    {                                                               \
+        tr.replace(tr.begin() + pos, tr.begin() + pos2 + 2, "%1");  \
+    }                                                               \
+    WRITE_MESSAGE_ELEMENT(#method " Plural", en, tr);               \
 }
 
 #define WRITE_ELEMENT2(method)\
