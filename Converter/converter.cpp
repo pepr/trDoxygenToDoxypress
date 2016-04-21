@@ -34,49 +34,49 @@ using namespace std;
 }
 
 
-#define WRITE_ELEMENT_WITH_C_OPTIMIZATION(method)\
-{ \
-    Config_setBool(false); \
-    string en{ trEn.method() };             \
-    string tr{ theTranslator->method() };   \
-    WRITE_MESSAGE_ELEMENT(#method, en, tr); \
+#define WRITE_ELEMENT_WITH_C_OPTIMIZATION(method)   \
+{                                                   \
+    Config_setBool(false);                          \
+    string en{ trEn.method() };                     \
+    string tr{ theTranslator->method() };           \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr);         \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    en = trEn.method();                     \
-    tr = theTranslator->method();           \
+    en = trEn.method();                             \
+    tr = theTranslator->method();                   \
     WRITE_MESSAGE_ELEMENT(#method " OPTIMIZE_OUTPUT_FOR_C", en, tr); \
 }
 
 #define WRITE_ELEMENT_WITH_JAVA_OPTIMIZATION(method)\
-{ \
-    Config_setBool(false); \
-    string en{ trEn.method() };             \
-    string tr{ theTranslator->method() };   \
-    WRITE_MESSAGE_ELEMENT(#method, en, tr); \
+{                                                   \
+    Config_setBool(false);                          \
+    string en{ trEn.method() };                     \
+    string tr{ theTranslator->method() };           \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr);         \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_JAVA is True */ \
-    en = trEn.method();                     \
-    tr = theTranslator->method();           \
+    en = trEn.method();                             \
+    tr = theTranslator->method();                   \
     WRITE_MESSAGE_ELEMENT(#method " OPTIMIZE_OUTPUT_JAVA", en, tr); \
 }
 
-#define WRITE_ELEMENT_EXTRACTALL(method)\
-{ \
-    Config_setBool(false); \
-    string en{ trEn.method(false) };             \
-    string tr{ theTranslator->method(false) };   \
-    WRITE_MESSAGE_ELEMENT(#method " DontExtractAll", en, tr); \
-    en = trEn.method(true);                     \
-    tr = theTranslator->method(true);           \
-    WRITE_MESSAGE_ELEMENT(#method " ExtractAll", en, tr); \
+#define WRITE_ELEMENT_EXTRACTALL(method)                        \
+{                                                               \
+    Config_setBool(false);                                      \
+    string en{ trEn.method(false) };                            \
+    string tr{ theTranslator->method(false) };                  \
+    WRITE_MESSAGE_ELEMENT(#method " DontExtractAll", en, tr);   \
+    en = trEn.method(true);                                     \
+    tr = theTranslator->method(true);                           \
+    WRITE_MESSAGE_ELEMENT(#method " ExtractAll", en, tr);       \
 }
 
-#define WRITE_ELEMENT_SINGULAR(method)\
-{ \
-    Config_setBool(false); \
-    string en{ trEn.method(false) };             \
-    string tr{ theTranslator->method(false) };   \
-    WRITE_MESSAGE_ELEMENT(#method " Plural", en, tr); \
-    en = trEn.method(true);                     \
-    tr = theTranslator->method(true);           \
+#define WRITE_ELEMENT_SINGULAR(method)                  \
+{                                                       \
+    Config_setBool(false);                              \
+    string en{ trEn.method(false) };                    \
+    string tr{ theTranslator->method(false) };          \
+    WRITE_MESSAGE_ELEMENT(#method " Plural", en, tr);   \
+    en = trEn.method(true);                             \
+    tr = theTranslator->method(true);                   \
     WRITE_MESSAGE_ELEMENT(#method " Singular", en, tr); \
 }
 
@@ -270,7 +270,7 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
         fout << " language=\"" << xx_XX << "\"";
     }
     fout << ">\n";
-    
+
     //------------------------------------------------------------------------------------
     // The RTF context
     fout << "<context>\n"
@@ -289,7 +289,7 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
 
     // Some tricks from the older code (throw it away after clarification).
 #if 0
-    
+
     fout << "\n<! --trWriteList() should be replaced using\n"
         "     &trLSep;, &trLSepAnd2;, and &trLSepAnd; sentences\n\n";
 
@@ -421,6 +421,58 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
     //-----------------------------------------------------------------
 #endif
 
+    // The language readable identification from the translator first.
+    WRITE_ELEMENT(idLanguage);
+
+    // Extract the separator definitions -- see the Translators Revisited
+    // for reasoning.
+    //
+    // Use the list with 3 elements. The English translator returns
+    // the result like "@0, @1, and @2". The ", " will be the separator
+    // between the items not separated "and". The ", and" is the separator
+    // of the last two items when the list has more than two elements.
+    {
+        // Fistly for the English translator
+        std::string enAnd{ trEn.trWriteList(3) };
+        std::string::size_type pos = enAnd.find("@1");
+        std::string enSep{ enAnd.substr(2, pos - 2) };   // after @0, before @1
+        enAnd.erase(0, pos + 2);         // cut the prefix including the @1
+        pos = enAnd.find("@2");
+        enAnd.erase(pos);                // cut the tail from @2 included
+
+        // Now use the list with 2 elements. The English translator should return
+        // the result like "@0 and @1" -- that is " and " without the comma.
+        // That separator should be used for lists with exactly two elements.
+        std::string enAnd2(trEn.trWriteList(2));
+        pos = enAnd2.find("@1");
+        enAnd2.erase(pos);       // erase the tail with @1 included
+        enAnd2.erase(0, 2);      // erase the @0
+
+        // The same for theTranslator
+        std::string trAnd{ theTranslator->trWriteList(3) };
+        pos = trAnd.find("@1");
+        std::string trSep{ trAnd.substr(2, pos - 2) };   // after @0, before @1
+        trAnd.erase(0, pos + 2);         // cut the prefix including the @1
+        pos = trAnd.find("@2");
+        trAnd.erase(pos);                // cut the tail from @2 included
+
+        // Now use the list with 2 elements.
+        std::string trAnd2(theTranslator->trWriteList(2));
+        pos = trAnd2.find("@1");
+        trAnd2.erase(pos);       // erase the tail with @1 included
+        trAnd2.erase(0, 2);      // erase the @0
+
+        WRITE_MESSAGE_ELEMENT("trLSep", enSep, trSep);
+        WRITE_MESSAGE_ELEMENT("trLSepAnd", enAnd, trAnd);
+        WRITE_MESSAGE_ELEMENT("trLSepAnd2", enAnd2, trAnd2);
+        //
+        // NOTE: The English implementation in 1.8.12 actually returns ", and"
+        // for bothe And, and And2 (they should differ). Some languages
+        // use the same value for bote And and And2. Some languages do not use
+        // any equivalent of "and". And some languages put a space even
+        // in front of the comma.
+
+    }
 
     // The following source was taken directly from the translator.h,
 	// (at the time of Doxygen version 1.8.12) and the
@@ -437,7 +489,7 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
     //////////////////////////////////////////
     // --- Language control methods -------------------
 
-    WRITE_ELEMENT(idLanguage);
+    // The following was moved up... WRITE_ELEMENT(idLanguage);
     WRITE_ELEMENT(latexLanguageSupportCommand);
 
     // --- Language translation methods -------------------
