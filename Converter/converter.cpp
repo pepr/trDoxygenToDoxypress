@@ -10,16 +10,28 @@
 
 using namespace std;
 
-
-#define WRITE_ELEMENT(method)\
-{ \
-    Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method "</comment>\n" \
-            "        <source>" << trEn.method() << "</source>\n" \
-            "        <translation>" << theTranslator->method() << "</translation>\n" \
-            "    </message>\n"; \
+// Auxiliary macro to write the <message> element with testing for "unfinished".
+#define WRITE_MESSAGE_ELEMENT(comment, en, tr)                              \
+{                                                                           \
+    fout << "    <message>\n"                                               \
+        "        <comment>" comment "</comment>\n"                          \
+        "        <source>" << en << "</source>\n";                          \
+    if (en == tr)                                                           \
+        fout << "        <translation type=\"unfinished\"></translation>\n";\
+    else                                                                    \
+        fout << "        <translation>" << tr << "</translation>\n";        \
+    fout << "    </message>\n";                                             \
 }
+
+
+#define WRITE_ELEMENT(method)               \
+{                                           \
+    Config_setBool(false);                  \
+    string en{ trEn.method() };             \
+    string tr{ theTranslator->method() };   \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr); \
+}
+
 
 #define WRITE_ELEMENT_WITH_C_OPTIMIZATION(method)\
 { \
@@ -871,7 +883,7 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
 
     WRITE_ELEMENT(trDetailLevel);
     WRITE_ELEMENT(trTemplateParameters);
-    WRITE_ELEMENT1(trAndMore);
+    WRITE_ELEMENT1(trAndMore);  ///\todo Should be int argument as the value makes difference (singular, plural)
     WRITE_ELEMENT_SINGULAR(trEnumGeneratedFromFiles);
     WRITE_ELEMENT1(trEnumReference);
     WRITE_ELEMENT2(trInheritedFrom);
