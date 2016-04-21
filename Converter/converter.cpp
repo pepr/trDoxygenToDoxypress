@@ -153,11 +153,9 @@ using namespace std;
 #define WRITE_ELEMENT2(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method "</comment>\n" \
-            "        <source>" << trEn.method("%1", "%2") << "</source>\n" \
-            "        <translation>" << theTranslator->method("%1", "%2") << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method("%1", "%2") };             \
+    string tr{ theTranslator->method("%1", "%2") };   \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr);     \
 }
 
 #define WRITE_ELEMENT_COMPOUNDTYPE_SINGULAR(method)\
@@ -177,16 +175,12 @@ using namespace std;
 		case ClassDef::Exception:  result = "Exception"; break;	\
 		default: break;											\
 		}														\
-        fout << "    <message>\n" \
-                "        <comment>" #method " Plural</comment>\n" \
-                "        <source>" << trEn.method(compType, false) << "</source>\n" \
-                "        <translation>" << theTranslator->method(compType, false) << "</translation>\n" \
-                "    </message>\n"; \
-        fout << "    <message>\n" \
-                "        <comment>" #method " Singular</comment>\n" \
-                "        <source>" << trEn.method(compType, true) << "</source>\n" \
-                "        <translation>" << theTranslator->method(compType, true) << "</translation>\n" \
-                "    </message>\n"; \
+        string en{ trEn.method(compType, false) };              \
+        string tr{ theTranslator->method(compType, false) };    \
+        WRITE_MESSAGE_ELEMENT(#method " Plural", en, tr);       \
+        en = trEn.method(compType, true);                       \
+        tr = theTranslator->method(compType, true);             \
+        WRITE_MESSAGE_ELEMENT(#method " Singular", en, tr);     \
 	} \
 }
 
@@ -197,27 +191,23 @@ using namespace std;
     std::string result{ "Undefined" }; \
     for (auto compType: list<ClassDef::CompoundType>{ ClassDef::Class, ClassDef::Struct, ClassDef::Union, ClassDef::Interface, \
 	                      ClassDef::Protocol, ClassDef::Category, ClassDef::Exception }) { \
-		switch (compType)                                       \
-		{														\
-		case ClassDef::Class:      result = "Class"; break;		\
-		case ClassDef::Struct:     result = "Struct"; break;	\
-		case ClassDef::Union:      result = "Union"; break;		\
-		case ClassDef::Interface:  result = "Interface"; break;	\
-		case ClassDef::Protocol:   result = "Protocol"; break;	\
-		case ClassDef::Category:   result = "Category"; break;	\
-		case ClassDef::Exception:  result = "Exception"; break;	\
-		default: break;											\
-		}														\
-        fout << "    <message>\n" \
-                "        <comment>" #method << result << " NotTemplate</comment>\n" \
-                "        <source>" << trEn.method("%1", compType, false) << "</source>\n" \
-                "        <translation>" << theTranslator->method("%1", compType, false) << "</translation>\n" \
-                "    </message>\n"; \
-        fout << "    <message>\n" \
-                "        <comment>" #method << result << " IsTemplate</comment>\n" \
-                "        <source>" << trEn.method("%1", compType, true) << "</source>\n" \
-                "        <translation>" << theTranslator->method("%1", compType, true) << "</translation>\n" \
-                "    </message>\n"; \
+		switch (compType)                                           \
+		{														    \
+		case ClassDef::Class:      result = "Class"; break;		    \
+		case ClassDef::Struct:     result = "Struct"; break;	    \
+		case ClassDef::Union:      result = "Union"; break;		    \
+		case ClassDef::Interface:  result = "Interface"; break;	    \
+		case ClassDef::Protocol:   result = "Protocol"; break;	    \
+		case ClassDef::Category:   result = "Category"; break;	    \
+		case ClassDef::Exception:  result = "Exception"; break;	    \
+		default: break;											    \
+		}														    \
+        string en{ trEn.method("%1", compType, false) };            \
+        string tr{ theTranslator->method("%1", compType, false) };  \
+        WRITE_MESSAGE_ELEMENT(#method " NotTemplate", en, tr);      \
+        en = trEn.method("%1", compType, true);                     \
+        tr = theTranslator->method("%1", compType, true);           \
+        WRITE_MESSAGE_ELEMENT(#method " IsTemplate", en, tr);       \
 	} \
 }
 
@@ -225,26 +215,18 @@ using namespace std;
 #define WRITE_ELEMENT_FIRSTCAPITAL_SINGULAR(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method << " FirstCapital Singular</comment>\n" \
-            "        <source>" << trEn.method(true, true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true, true) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method << " FirstCapital Plural</comment>\n" \
-            "        <source>" << trEn.method(true, false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true, false) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method << " FirstSmall Singular</comment>\n" \
-            "        <source>" << trEn.method(false, true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false, true) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method << " FirstSmall Plural</comment>\n" \
-            "        <source>" << trEn.method(false, false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false, false) << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method(true, true) };            \
+    string tr{ theTranslator->method(true, true) };  \
+    WRITE_MESSAGE_ELEMENT(#method " FirstCapital Singular", en, tr);    \
+    en = trEn.method(true, false);            \
+    tr = theTranslator->method(true, false);  \
+    WRITE_MESSAGE_ELEMENT(#method " FirstCapital Plural", en, tr);    \
+    en = trEn.method(false, true);            \
+    tr = theTranslator->method(false, true);  \
+    WRITE_MESSAGE_ELEMENT(#method " FirstSmall Singular", en, tr);    \
+    en = trEn.method(false, false);            \
+    tr = theTranslator->method(false, false);  \
+    WRITE_MESSAGE_ELEMENT(#method " FirstSmall Plural", en, tr);    \
 }
 
 
