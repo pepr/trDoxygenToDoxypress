@@ -2,6 +2,7 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <sstream>
 
 #include "xxx.h"
 #include "classdef.h"
@@ -14,7 +15,7 @@ using namespace std;
 #define WRITE_MESSAGE_ELEMENT(comment, en, tr)                              \
 {                                                                           \
     fout << "    <message>\n"                                               \
-        "        <comment>" comment "</comment>\n"                          \
+        "        <comment>" << comment << "</comment>\n"                    \
         "        <source>" << en << "</source>\n";                          \
     if (en == tr)                                                           \
         fout << "        <translation type=\"unfinished\"></translation>\n";\
@@ -48,117 +49,90 @@ using namespace std;
 #define WRITE_ELEMENT_WITH_JAVA_OPTIMIZATION(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method "</comment>\n" \
-            "        <source>" << trEn.method() << "</source>\n" \
-            "        <translation>" << theTranslator->method() << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method() };             \
+    string tr{ theTranslator->method() };   \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr); \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_JAVA is True */ \
-    fout << "    <message>\n" \
-            "        <comment>" #method " OPTIMIZE_OUTPUT_JAVA</comment>\n" \
-            "        <source>" << trEn.method() << "</source>\n" \
-            "        <translation>" << theTranslator->method() << "</translation>\n" \
-            "    </message>\n"; \
+    en = trEn.method();                     \
+    tr = theTranslator->method();           \
+    WRITE_MESSAGE_ELEMENT(#method " OPTIMIZE_OUTPUT_JAVA", en, tr); \
 }
 
 #define WRITE_ELEMENT_EXTRACTALL(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method " DontExtractAll</comment>\n" \
-            "        <source>" << trEn.method(false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method " ExtractAll</comment>\n" \
-            "        <source>" << trEn.method(true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method(false) };             \
+    string tr{ theTranslator->method(false) };   \
+    WRITE_MESSAGE_ELEMENT(#method " DontExtractAll", en, tr); \
+    en = trEn.method(true);                     \
+    tr = theTranslator->method(true);           \
+    WRITE_MESSAGE_ELEMENT(#method " ExtractAll", en, tr); \
 }
 
 #define WRITE_ELEMENT_SINGULAR(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method " Plural</comment>\n" \
-            "        <source>" << trEn.method(false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method " Singular</comment>\n" \
-            "        <source>" << trEn.method(true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method(false) };             \
+    string tr{ theTranslator->method(false) };   \
+    WRITE_MESSAGE_ELEMENT(#method " Plural", en, tr); \
+    en = trEn.method(true);                     \
+    tr = theTranslator->method(true);           \
+    WRITE_MESSAGE_ELEMENT(#method " Singular", en, tr); \
 }
 
 
 #define WRITE_ELEMENT_ENABLE(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method " Disabled</comment>\n" \
-            "        <source>" << trEn.method(false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method " Enabled</comment>\n" \
-            "        <source>" << trEn.method(true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method(false) };             \
+    string tr{ theTranslator->method(false) };   \
+    WRITE_MESSAGE_ELEMENT(#method " Disabled", en, tr); \
+    en = trEn.method(true);                     \
+    tr = theTranslator->method(true);           \
+    WRITE_MESSAGE_ELEMENT(#method " Enabled", en, tr); \
 }
 
 
 #define WRITE_ELEMENT_EXTRACTALL_WITH_C_OPTIMIZATION(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method " DontExtractAll</comment>\n" \
-            "        <source>" << trEn.method(false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method " ExtractAll</comment>\n" \
-            "        <source>" << trEn.method(true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method(false) };             \
+    string tr{ theTranslator->method(false) };   \
+    WRITE_MESSAGE_ELEMENT(#method " DontExtractAll", en, tr); \
+    en = trEn.method(true);                     \
+    tr = theTranslator->method(true);           \
+    WRITE_MESSAGE_ELEMENT(#method " ExtractAll", en, tr); \
     Config_setBool(true); /* emulate OPTIMIZE_OUTPUT_FOR_C is True */ \
-    fout << "    <message>\n" \
-            "        <comment>" #method " DontExtractAll OPTIMIZE_OUTPUT_FOR_C</comment>\n" \
-            "        <source>" << trEn.method(false) << "</source>\n" \
-            "        <translation>" << theTranslator->method(false) << "</translation>\n" \
-            "    </message>\n"; \
-    fout << "    <message>\n" \
-            "        <comment>" #method " ExtractAll OPTIMIZE_OUTPUT_FOR_C</comment>\n" \
-            "        <source>" << trEn.method(true) << "</source>\n" \
-            "        <translation>" << theTranslator->method(true) << "</translation>\n" \
-            "    </message>\n"; \
+    en = trEn.method(false);                     \
+    tr = theTranslator->method(false);           \
+    WRITE_MESSAGE_ELEMENT(#method " DontExtractAll", en, tr); \
+    en = trEn.method(true);                     \
+    tr = theTranslator->method(true);           \
+    WRITE_MESSAGE_ELEMENT(#method " ExtractAll", en, tr); \
 }
 
 
 #define WRITE_ELEMENT1(method)\
 { \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method "</comment>\n" \
-            "        <source>" << trEn.method("%1") << "</source>\n" \
-            "        <translation>" << theTranslator->method("%1") << "</translation>\n" \
-            "    </message>\n"; \
+    string en{ trEn.method("%1") };             \
+    string tr{ theTranslator->method("%1") };   \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr);     \
 }
 
 #define WRITE_ELEMENT1REF(method)\
 { \
-    QCString a{"%1"}; \
     Config_setBool(false); \
-    fout << "    <message>\n" \
-            "        <comment>" #method "</comment>\n" \
-            "        <source>" << trEn.method(a) << "</source>\n" \
-            "        <translation>" << theTranslator->method(a) << "</translation>\n" \
-            "    </message>\n"; \
+    QCString a{"%1"}; \
+    string en{ trEn.method(a) };             \
+    string tr{ theTranslator->method(a) };   \
+    WRITE_MESSAGE_ELEMENT(#method, en, tr);  \
 }
 
 #define WRITE_ELEMENT1INT(method)\
 { \
     Config_setBool(false);                                          \
+    ostringstream oss;                                              \
     for (int i = 1; i < 4; ++i)                                     \
     {                                                               \
         string en{ trEn.method(i) };                                \
@@ -170,11 +144,9 @@ using namespace std;
         pos = tr.find("@0");                                        \
         if (pos != string::npos) { tr.replace(pos, 2, "%1"); }      \
                                                                     \
-        fout << "    <message>\n"                                   \
-            "        <comment>" #method << " " << i << "</comment>\n" \
-            "        <source>" << en << "</source>\n"               \
-            "        <translation>" << tr << "</translation>\n"     \
-            "    </message>\n";                                     \
+        oss.str("");                                                \
+        oss << #method " " << i;                                    \
+        WRITE_MESSAGE_ELEMENT(oss.str(), en, tr);                   \
     }                                                               \
 }
 
