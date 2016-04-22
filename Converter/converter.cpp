@@ -253,7 +253,7 @@ void GenerateTranslatorSentences(const std::string& lang_readable,
                                  const std::string& fname_suffix,
                                  const std::string& xx_XX = "")
 {
-    cerr << "Generating sentence definitions for " << lang_readable << " ... ";
+    cerr << "Generating translations for " << lang_readable << " ... ";
 
     // Construct the File Name, and open the file for writing.
     string fname{ "doxy_" + fname_suffix + ".ts2" };
@@ -947,10 +947,10 @@ int main()
     GenerateTranslatorSentences("afrikaans", "af", "af_ZA");
     GenerateTranslatorSentences("arabic", "ar", "ar_SA");
     GenerateTranslatorSentences("armenian", "am", "am_ET");
-    GenerateTranslatorSentences("brazilian", "pt_BR", "pt_BR");
+    GenerateTranslatorSentences("brazilian", "pt_br", "pt_BR");
     GenerateTranslatorSentences("catalan", "ca", "ca_ES");
     GenerateTranslatorSentences("chinese", "zh", "zh_CN");
-    GenerateTranslatorSentences("chinese-traditional", "zh_TW", "zh_TW");
+    GenerateTranslatorSentences("chinese-traditional", "zh_tw", "zh_TW");
     GenerateTranslatorSentences("croatian", "hr", "hr_HR");
     GenerateTranslatorSentences("czech", "cz", "cs_CZ");
     GenerateTranslatorSentences("danish", "da", "da_DK");
